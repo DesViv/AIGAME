@@ -174,7 +174,7 @@ namespace Completed
         //Update is called every frame.
         void Update()
         {
-            bool continueGame = true;
+           /* bool continueGame = true;
 			for (int i = 0; i < players.Count; i++) {
                 continueGame = false;
 				Debug.Log (players[i].alive);
@@ -193,7 +193,7 @@ namespace Completed
                 return;
 
             //Start moving enemies.
-            StartCoroutine(MoveEnemies());
+            StartCoroutine(MoveEnemies());*/
         }
 
         //Call this to add the passed in Enemy to the List of Enemy objects.
