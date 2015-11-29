@@ -21,8 +21,11 @@ namespace Completed
         public int team;
         private Text attackText;
         private Text healthText;
-
-
+        public int moveRange;
+        //Moves a unit can make each turn
+        public int stepsLeft;
+        Vector3 currentPos;
+        public bool myTurn;
         //Start overrides the virtual Start function of the base class.
         protected override void Start ()
 		{
@@ -34,17 +37,17 @@ namespace Completed
             //Get and store a reference to the attached Animator component.
             animator = GetComponent<Animator> ();
 
-			//Find the Player GameObject using it's tag and store a reference to its transform component.
-			target = GameObject.FindGameObjectWithTag ("Player").transform;
+            //Find the Player GameObject using it's tag and store a reference to its transform component.
+            currentPos = transform.position; //Returns the current position of the unit
 
 			//Call the start function of our base class MovingObject.
 			base.Start ();
 		}
 
 
-		//Override the AttemptMove function of MovingObject to include functionality needed for Enemy to skip turns.
-		//See comments in MovingObject for more on how base AttemptMove function works.
-		protected override void AttemptMove (int xDir, int yDir)
+        //Override the AttemptMove function of MovingObject to include functionality needed for Enemy to skip turns.
+        //See comments in MovingObject for more on how base AttemptMove function works.
+        protected override void AttemptMove (int xDir, int yDir)
 		{
 			//Check if skipMove is true, if so set it to false and skip this turn.
 			if(skipMove)
@@ -85,10 +88,128 @@ namespace Completed
 			AttemptMove (xDir, yDir);
 		}
 
+        /*
+         * Literally just copied/pasted this form player, but it should return the number of valid moves based on move range
+         * Probably not even necessary for this class
+         */ 
+        private List<GameObject> showValidTiles(int moveRange)
+        {
+            GameObject[] floors;
+            List<GameObject> validFloors = new List<GameObject>();
+            floors = GameObject.FindGameObjectsWithTag("Floor");
+            int curX = (int)transform.position.x;
+            int curY = (int)transform.position.y;
 
-		//OnCantMove is called if Enemy attempts to move into a space occupied by a Player, it overrides the OnCantMove function of MovingObject
-		//and takes a generic parameter T which we use to pass in the component we expect to encounter, in this case Player
-		protected override void OnCantMove <T> (T component)
+            for (int i = 0; i < floors.Length; i++)
+            {
+                int fX = (int)floors[i].transform.position.x;
+                int fY = (int)floors[i].transform.position.y;
+                int xdif = Mathf.Abs(fX - curX);
+                int ydif = Mathf.Abs(fY - curY);
+                if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
+                {
+
+                    Vector3 rayOrigin = new Vector3(10, 10, -100);
+                    Vector3 rayDes = new Vector3(fX, fY, 0.1f);
+                    Vector3 rayDir = (rayDes - rayOrigin).normalized;
+                    Ray ray = new Ray(rayOrigin, rayDir);
+                    if (!Physics.Raycast(ray))
+                    {
+                        SpriteRenderer renderer = floors[i].GetComponent<SpriteRenderer>();
+                        renderer.color = Color.green;
+                        validFloors.Add(floors[i]);
+                        validPositions.Add(floors[i].transform.position);
+                    }
+                    else
+                    {
+                        //Debug.Log("wall at (" + fX + "," + fY + ")");
+                    }
+                }
+
+            }
+            return validFloors;
+        }
+
+
+        /*
+         * Don't actually use any of these because they don't check to see if it's valid to even move, just some examples on how to move.
+         */ 
+        public void moveLeft()
+        {
+            currentPos = transform.position;
+            currentPos = new Vector3(currentPos.x - 1, currentPos.y, 1f);
+            transform.position = currentPos;
+        }
+        public void moveRight()
+        {
+            currentPos = transform.position;
+            currentPos = new Vector3(currentPos.x + 1, currentPos.y, 1f);
+            transform.position = currentPos;
+        }
+
+        public void moveUp()
+        {
+            currentPos = transform.position;
+            currentPos = new Vector3(currentPos.x, currentPos.y + 1, 1f);
+            transform.position = currentPos;
+        }
+        public void moveDown()
+        {
+            currentPos = transform.position;
+            currentPos = new Vector3(currentPos.x, currentPos.y - 1, 1f);
+            transform.position = currentPos;
+        }
+
+
+
+        private List<GameObject> showValidAttack()
+        {
+            List<GameObject> valid = new List<GameObject>();
+            int curX = (int)transform.position.x;
+            int curY = (int)transform.position.y;
+            Vector3 cur = new Vector3(10, 10, -100);
+            List<Vector3> list = new List<Vector3>();
+            list.Add(new Vector3(curX, curY + 1, 0.1f));
+            list.Add(new Vector3(curX, curY - 1, 0.1f));
+            list.Add(new Vector3(curX - 1, curY, 0.1f));
+            list.Add(new Vector3(curX + 1, curY, 0.1f));
+            for (int i = 0; i < list.Count; i++)
+            {
+                RaycastHit hit;
+                Ray ray = new Ray(cur, (list[i] - cur).normalized);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    GameObject target = hit.collider.gameObject;
+
+                    if (target.tag == "Player")
+                    {
+                        Player current = target.gameObject.GetComponent<Player>();
+                        if (this.team != current.team)
+                        {
+                            valid.Add(hit.collider.gameObject);
+                            SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
+                            sr.color = new Color(0f, 0f, 0f, 1f);
+                        }
+                    }
+                    else if(target.tag == "Enemy2" || target.tag == "Enemy")
+                    {
+                        Enemy current = target.gameObject.GetComponent<Enemy>();
+                        if (this.team != current.team)
+                        {
+                            valid.Add(hit.collider.gameObject);
+                            SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
+                            sr.color = new Color(0f, 0f, 0f, 1f);
+                        }
+                    }
+                }
+            }
+            return valid;
+        }
+
+
+        //OnCantMove is called if Enemy attempts to move into a space occupied by a Player, it overrides the OnCantMove function of MovingObject
+        //and takes a generic parameter T which we use to pass in the component we expect to encounter, in this case Player
+        protected override void OnCantMove <T> (T component)
 		{
 			//Declare hitPlayer and set it to equal the encountered component.
 			Player hitPlayer = component as Player;
@@ -107,8 +228,8 @@ namespace Completed
         {
             attackText.text = "AP: " + attackPower;
             healthText.text = "HP: " + health;
-            /*if (myTurn)
-                stepsLeftText.text = "Moves remaining: " + stepsLeft;*/
+            //if (myTurn)
+                //stepsLeftText.text = "Moves remaining: " + stepsLeft;
         }
         void OnMouseExit()
         {

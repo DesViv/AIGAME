@@ -96,7 +96,7 @@ namespace Completed
         {
             foreach(Player temp in stuff)
             {
-                temp.myTurn = set;
+                temp.setTurn(set);
                 temp.setSteps(5);
                 if (!set)
                     temp.endPlayerTurn();
@@ -105,9 +105,6 @@ namespace Completed
         public void setCurTeam(int team)
         {
             curTeam = team;
-            if (curTeam == 0)
-                captain = player0[0];
-            else captain = player1[0];
         }
 
 
@@ -134,6 +131,32 @@ namespace Completed
                     Application.LoadLevel("GameOver");
                 }
                 Debug.Log(player1.Count + " player1");
+            }
+        }
+
+        /*
+         * When a unit dies, remove them from the list
+         * then check for win condition
+         */
+        public void removeEnemy(Enemy dead, int team)
+        {
+            if (team == 0)
+            {
+                enemy0.Remove(dead);
+                Debug.Log(enemy1.Count + " enemy1");
+                if (enemy1.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+            }
+            else
+            {
+                enemy1.Remove(dead);
+                if (enemy1.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+                Debug.Log(enemy1.Count + " enemy1");
             }
         }
 

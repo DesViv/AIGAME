@@ -85,7 +85,7 @@ namespace Completed
 
 		void OnMouseDown()
         {
-            Debug.Log(firstClick + "the fuck is this shit breh");
+            
             if (myTurn)//   &&  (GM.curPlayer==null|| GM.curPlayer == this))
             {
                 Debug.Log(this.GetType());
@@ -121,6 +121,10 @@ namespace Completed
             stepsLeft = 5;
         }
 
+        public void setTurn(bool turn)
+        {
+            myTurn = turn;
+        }
         public void setSteps(int steps)
         {
             stepsLeft = steps;
@@ -147,7 +151,6 @@ namespace Completed
                     Vector3 rayDes = new Vector3(fX, fY, 0.1f);
                     Vector3 rayDir = (rayDes - rayOrigin).normalized;
                     Ray ray = new Ray(rayOrigin,rayDir);
-                    //Debug.Log(rayOrigin + " " + rayDes + " " + Physics.Raycast(ray));
                     if (!Physics.Raycast(ray)) {
                         SpriteRenderer renderer = floors[i].GetComponent<SpriteRenderer>();
                         renderer.color = Color.green;
@@ -221,7 +224,7 @@ namespace Completed
 		private void Update ()
 		{
 			//If it's not the player's turn, exit the function.
-			if(!GameManager.instance.playersTurn)
+			if(!myTurn)
                 return;
 
 			int desX = -100;  	//Used to store the horizontal move direction.
@@ -302,9 +305,6 @@ namespace Completed
             {
                 float t = elapsedTime / duration; //0 means the animation just started, 1 means it finished
                 damageText.rectTransform.position = Vector2.Lerp(start, end, t);
-                //TODO: make text change colors, maybe
-                //Text.color = Color.Lerp(textStartColor, textEndColor, t);
-                //Debug.Log(elapsedTime + " Time");
                 elapsedTime += 2*Time.deltaTime;
                 yield return null;
             }
@@ -379,25 +379,6 @@ namespace Completed
 		{
 			//Load the last scene loaded, in this case Main, the only scene in the game.
 			Application.LoadLevel (Application.loadedLevel);
-		}
-
-
-
-		//CheckIfGameOver checks if the player is out of food points and if so, ends the game.
-		private void CheckIfGameOver ()
-		{
-			/*//Check if food point total is less than or equal to zero.
-			if (food <= 0)
-			{
-				//Call the PlaySingle function of SoundManager and pass it the gameOverSound as the audio clip to play.
-				SoundManager.instance.PlaySingle (gameOverSound);
-
-				//Stop the background music.
-				SoundManager.instance.musicSource.Stop();
-
-				//Call the GameOver function of GameManager.
-				GameManager.instance.GameOver ();
-			}*/
 		}
 
         void OnMouseOver()
