@@ -36,7 +36,7 @@ namespace Completed
             healthText = GameObject.Find("Health").GetComponent<Text>();
             //Get and store a reference to the attached Animator component.
             animator = GetComponent<Animator> ();
-
+            myTurn = false;
             //Find the Player GameObject using it's tag and store a reference to its transform component.
             currentPos = transform.position; //Returns the current position of the unit
 
@@ -44,7 +44,7 @@ namespace Completed
 			base.Start ();
 		}
 
-
+       
         //Override the AttemptMove function of MovingObject to include functionality needed for Enemy to skip turns.
         //See comments in MovingObject for more on how base AttemptMove function works.
         protected override void AttemptMove (int xDir, int yDir)
@@ -68,9 +68,18 @@ namespace Completed
 		//MoveEnemy is called by the GameManger each turn to tell each Enemy to try to move towards the player.
 		public void MoveEnemy ()
 		{
-			//Declare variables for X and Y axis move directions, these range from -1 to 1.
-			//These values allow us to choose between the cardinal directions: up, down, left and right.
-			int xDir = 0;
+            Debug.Log(stepsLeft + " fuck this");
+            while (stepsLeft != 0)
+            {
+                List<GameObject> validMoves = showValidTiles(1);
+                StartCoroutine(wait());
+                transform.position = validMoves[0].transform.position;
+                stepsLeft--;
+            }
+            myTurn = false;           
+            //Declare variables for X and Y axis move directions, these range from -1 to 1.
+            //These values allow us to choose between the cardinal directions: up, down, left and right.
+            /*int xDir = 0;
 			int yDir = 0;
 
 			//If the difference in positions is approximately zero (Epsilon) do the following:
@@ -85,13 +94,18 @@ namespace Completed
 				xDir = target.position.x > transform.position.x ? 1 : -1;
 
 			//Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
-			AttemptMove (xDir, yDir);
-		}
+			AttemptMove (xDir, yDir);*/
+        }
+        //Kill some time
+        public IEnumerator wait()
+        {
+            yield return new WaitForSeconds(5);
+        }
 
         /*
          * Literally just copied/pasted this form player, but it should return the number of valid moves based on move range
          * Probably not even necessary for this class
-         */ 
+         */
         private List<GameObject> showValidTiles(int moveRange)
         {
             GameObject[] floors;
@@ -106,7 +120,7 @@ namespace Completed
                 int fY = (int)floors[i].transform.position.y;
                 int xdif = Mathf.Abs(fX - curX);
                 int ydif = Mathf.Abs(fY - curY);
-                if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
+                if (xdif + ydif <= moveRange && xdif + ydif != 0)
                 {
 
                     Vector3 rayOrigin = new Vector3(10, 10, -100);
@@ -116,7 +130,7 @@ namespace Completed
                     if (!Physics.Raycast(ray))
                     {
                         SpriteRenderer renderer = floors[i].GetComponent<SpriteRenderer>();
-                        renderer.color = Color.green;
+                        //renderer.color = Color.green;
                         validFloors.Add(floors[i]);
                         validPositions.Add(floors[i].transform.position);
                     }
@@ -129,11 +143,10 @@ namespace Completed
             }
             return validFloors;
         }
-
-
+   
         /*
          * Don't actually use any of these because they don't check to see if it's valid to even move, just some examples on how to move.
-         */ 
+         */
         public void moveLeft()
         {
             currentPos = transform.position;

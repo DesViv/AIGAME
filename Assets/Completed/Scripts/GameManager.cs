@@ -72,8 +72,10 @@ namespace Completed
         {
 
             Debug.Log("Current team: " + curTeam);
+            Debug.Log(mode);
             if (mode == 0) // PlayervPlayer
             {
+                Debug.Log(player0.Count + " IN WRONg MODE" + "    " + enemy1.Count);
                 if (curTeam == 0)
                 {
                     setTurn(player1, true);
@@ -86,7 +88,42 @@ namespace Completed
                     setTurn(player1, false);
                     curTeam = 0;
                 }
-            } 
+            }
+            else if(mode == 1) //PlayervEnemy
+            {
+
+                Debug.Log(player0.Count + " Count" + "    " + enemy1.Count);
+                if (curTeam == 0)
+                {
+                    setEnemyTurn(enemy1, true);                    
+                    setTurn(player0, false);
+                    curTeam = 1;
+                    StartCoroutine(MoveEnemies(enemy1));
+                }
+                else
+                {
+                    setTurn(player0, true);
+                    setEnemyTurn(enemy1, false);
+                    curTeam = 0;
+                }
+            }
+            else if(mode == 2) //EvE
+            {
+                if (curTeam == 0)
+                {
+                    setEnemyTurn(enemy1, true);
+                    setEnemyTurn(enemy0, false);
+                    StartCoroutine(MoveEnemies(enemy1));
+                    curTeam = 1;
+                }
+                else
+                {
+                    setEnemyTurn(enemy0, true);
+                    setEnemyTurn(enemy1, false);
+                    StartCoroutine(MoveEnemies(enemy0));
+                    curTeam = 0;
+                }
+            }
         }
 
         /*
@@ -94,12 +131,24 @@ namespace Completed
          */
         public void setTurn(List<Player> stuff, bool set)
         {
-            foreach(Player temp in stuff)
+            Debug.Log(stuff.Count + " fuckin up the count");
+            foreach (Player temp in stuff)
             {
                 temp.setTurn(set);
                 temp.setSteps(5);
                 if (!set)
                     temp.endPlayerTurn();
+            }
+        }
+
+        public void setEnemyTurn(List<Enemy> stuff, bool set)
+        {
+            foreach (Enemy temp in stuff)
+            {
+                temp.myTurn = set;
+                temp.stepsLeft = 5;
+                //if (!set)
+                    //temp.endPlayerTurn();
             }
         }
         public void setCurTeam(int team)
@@ -182,17 +231,20 @@ namespace Completed
             levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
             //Set the text of levelText to the string "Day" and append the current level number.
-            levelText.text = "Day " + level;
+            //levelText.text = "Day " + level;
 
             //Set levelImage to active blocking player's view of the game board during setup.
-            levelImage.SetActive(false);
+            //levelImage.SetActive(false);
             doingSetup = false;
 
             //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
             Invoke("HideLevelImage", levelStartDelay);
 
             //Clear any Enemy objects in our List to prepare for next level.
-            //enemies.Clear();
+            enemy0.Clear();
+            enemy1.Clear();
+            player0.Clear();
+            player1.Clear();
 
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(level);
@@ -217,6 +269,7 @@ namespace Completed
         //Update is called every frame.
         void Update()
         {
+            mode = BoardManager.mode;
            /* bool continueGame = true;
 			for (int i = 0; i < players.Count; i++) {
                 continueGame = false;
@@ -266,35 +319,35 @@ namespace Completed
         }
 
         //Coroutine to move enemies in sequence.
-       /*IEnumerator MoveEnemies()
+       IEnumerator MoveEnemies(List<Enemy> enemies)
         {
+            Debug.Log("We made it");
             //While enemiesMoving is true player is unable to move.
             enemiesMoving = true;
-
             //Wait for turnDelay seconds, defaults to .1 (100 ms).
-            yield return new WaitForSeconds(turnDelay);
+            yield return new WaitForSeconds(turnDelay);               
+                //If there are no enemies spawned (IE in first level):
+                if (enemies.Count == 0)
+                {
+                    //Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
+                    yield return new WaitForSeconds(turnDelay);
+                }
 
-            //If there are no enemies spawned (IE in first level):
-            if (enemies.Count == 0)
-            {
-                //Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
-                yield return new WaitForSeconds(turnDelay);
-            }
-
-            //Loop through List of Enemy objects.
-            for (int i = 0; i < enemies.Count; i++)
-            {
+                //Loop through List of Enemy objects.
+                for (int i = 0; i < enemies.Count; i++)
+                {
                 //Call the MoveEnemy function of Enemy at index i in the enemies List.
                 enemies[i].MoveEnemy();
+                    //Wait for Enemy's moveTime before moving next Enemy,
+                    yield return new WaitForSeconds(enemies[i].moveTime);
+                }
+                //Once Enemies are done moving, set playersTurn to true so player can move.
+                playersTurn = true;
 
-                //Wait for Enemy's moveTime before moving next Enemy,
-                yield return new WaitForSeconds(enemies[i].moveTime);
-            }
-            //Once Enemies are done moving, set playersTurn to true so player can move.
-            playersTurn = true;
-
-            //Enemies are done moving, set enemiesMoving to false.
-            enemiesMoving = false;
-        } */
+                //Enemies are done moving, set enemiesMoving to false.
+                enemiesMoving = false;
+            endTurn();           
+           
+        }
     }
 }

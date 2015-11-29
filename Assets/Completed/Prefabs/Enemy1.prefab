@@ -108,6 +108,9 @@ MonoBehaviour:
   attackPower: 5
   alive: 0
   team: 0
+  moveRange: 1
+  stepsLeft: 1
+  myTurn: 0
 --- !u!212 &21295068
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -150,6 +153,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: attackPower
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stepsLeft
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

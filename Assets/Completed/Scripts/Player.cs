@@ -196,6 +196,14 @@ namespace Completed
                             sr.color = new Color(0f, 0f, 0f, 1f);
                         }
                     }
+                    if (target.tag == "Enemy" || target.tag == "Enemy2")
+                    {
+                        Enemy current = target.gameObject.GetComponent<Enemy>();
+                        valid.Add(hit.collider.gameObject);
+                        SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
+                        sr.color = new Color(0f, 0f, 0f, 1f);
+                        
+                    }
                 }
             }
             return valid;
