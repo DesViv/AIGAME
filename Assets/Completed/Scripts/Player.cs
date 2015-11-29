@@ -181,7 +181,7 @@ namespace Completed
             for (int i = 0; i < list.Count; i++)
             {
                 RaycastHit hit;
-                Ray ray = new Ray(cur, (list[i] - cur).normalized);
+                Ray ray = new Ray(cur, (list[i] - cur).normalized);               
                 if (Physics.Raycast(ray,out hit))
                 {
                     GameObject target = hit.collider.gameObject;
@@ -196,6 +196,7 @@ namespace Completed
                             sr.color = new Color(0f, 0f, 0f, 1f);
                         }
                     }
+                    Debug.Log(target.tag + " asdasd as");
                     if (target.tag == "Enemy" || target.tag == "Enemy2")
                     {
                         Enemy current = target.gameObject.GetComponent<Enemy>();
@@ -285,19 +286,40 @@ namespace Completed
             if (valid)
             {
                 Player toHit = target.gameObject.GetComponent<Player>();
-                toHit.health -= this.attackPower;
-                damageText.text = "-" + this.attackPower;
-                Vector2 pos = Camera.main.WorldToScreenPoint(target.transform.position);
-                Vector2 end = new Vector2(pos.x + 5, pos.y + 20);
-                //Floating damage text TODO: Dynamically add Text object so multiple damage texts can be shown at once
-                StartCoroutine(floatingText(pos, end));
-                if (toHit.health <= 0)
+                if (toHit != null)
                 {
-                    Destroy(target);
-                    GM.removePlayer(toHit, toHit.team);
+
+                    toHit.health -= this.attackPower;
+                    damageText.text = "-" + this.attackPower;
+                    Vector2 pos = Camera.main.WorldToScreenPoint(target.transform.position);
+                    Vector2 end = new Vector2(pos.x + 5, pos.y + 20);
+                    //Floating damage text TODO: Dynamically add Text object so multiple damage texts can be shown at once
+                    StartCoroutine(floatingText(pos, end));
+                    if (toHit.health <= 0)
+                    {
+                        Destroy(target);
+                        GM.removePlayer(toHit, toHit.team);
+                    }
+                    resetValidTiles();
+                    endPlayerTurn();
                 }
-                resetValidTiles();
-                endPlayerTurn();
+                else
+                {
+                    Enemy toHitEnemy = target.gameObject.GetComponent<Enemy>();
+                    toHitEnemy.health -= this.attackPower;
+                    damageText.text = "-" + this.attackPower;
+                    Vector2 pos = Camera.main.WorldToScreenPoint(target.transform.position);
+                    Vector2 end = new Vector2(pos.x + 5, pos.y + 20);
+                    //Floating damage text TODO: Dynamically add Text object so multiple damage texts can be shown at once
+                    StartCoroutine(floatingText(pos, end));
+                    if (toHitEnemy.health <= 0)
+                    {
+                        Destroy(target);
+                        //GM.removePlayer(toHitEnemy, toHitEnemy.team);
+                    }
+                    resetValidTiles();
+                    endPlayerTurn();
+                }
             }
 
             return valid;
