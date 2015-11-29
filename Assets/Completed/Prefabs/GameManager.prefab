@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff182172d726402b9e9eacdb89c9724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   columns: 20
   rows: 20
   wallCount:
@@ -86,23 +87,28 @@ MonoBehaviour:
   - {fileID: 110520, guid: 5ddc2d7828b2d462286f09274199ad9a, type: 2}
   - {fileID: 110520, guid: 64139c47b57e34c5fa97fd79f8d25244, type: 2}
   - {fileID: 110520, guid: 741804431f4d341cdae1f15b3896aeff, type: 2}
-  foodTiles:
-  - {fileID: 110520, guid: ad25a4e752915438e9f55a35bedacf1f, type: 2}
-  - {fileID: 110520, guid: 46e8bf4bf645a47e3ae1b60c7e18418c, type: 2}
   playerTiles:
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
-  enemyTiles:
   - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
   - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
   - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+  player2Tiles:
+  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
   outerWallTiles:
   - {fileID: 110520, guid: 7094f72151ec74f569c4e03f1ec0f8e7, type: 2}
   - {fileID: 110520, guid: b0ace21a29149403094422fb3bd96aa9, type: 2}
   - {fileID: 110520, guid: e85c94355cc4641da919bd5d0ac956d4, type: 2}
   blockTiles:
   - {fileID: 138320, guid: efc757259c3ada34abf3be743c5aea73, type: 2}
+  enemyTiles:
+  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+  enemy2Tiles:
+  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
+  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
+  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -120,6 +126,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemy2Tiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: player2Tiles.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
@@ -141,7 +155,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: GameManager
@@ -149,15 +163,43 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[2]
       value: 
+      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: player2Tiles.Array.data[0]
+      value: 
       objectReference: {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: player2Tiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: player2Tiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemy2Tiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemy2Tiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemy2Tiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133658}

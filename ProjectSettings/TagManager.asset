@@ -13,6 +13,7 @@ TagManager:
   - GameManager
   - Player2
   - Background
+  - Enemy2
   layers:
   - Default
   - TransparentFX

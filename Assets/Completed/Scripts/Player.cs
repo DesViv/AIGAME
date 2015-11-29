@@ -66,6 +66,7 @@ namespace Completed
 
             if (team == 0)
             {
+                //Player 1 always goes first
                 this.myTurn = true;
                 GM.player0.Add(this);
             }
@@ -84,7 +85,7 @@ namespace Completed
 
 		void OnMouseDown()
         {
-            Debug.Log(myTurn + "the fuck is this shit breh");
+            Debug.Log(firstClick + "the fuck is this shit breh");
             if (myTurn)//   &&  (GM.curPlayer==null|| GM.curPlayer == this))
             {
                 Debug.Log(this.GetType());

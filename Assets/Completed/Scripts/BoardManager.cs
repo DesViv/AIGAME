@@ -24,8 +24,9 @@ namespace Completed
 				maximum = max;
 			}
 		}
-		
-		
+
+       public static int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
+
 		public int columns = 20; 										//Number of columns in our game board.
 		public int rows = 20;											//Number of rows in our game board.
 		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.
@@ -33,11 +34,12 @@ namespace Completed
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] wallTiles;									//Array of wall prefabs.
-		public GameObject[] foodTiles;									//Array of food prefabs.
-		public GameObject[] playerTiles;									//Array of enemy prefabs.
-        public GameObject[] enemyTiles;
+		public GameObject[] playerTiles;								//Player prefabs
+        public GameObject[] player2Tiles;
         public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
         public GameObject[] blockTiles;
+        public GameObject[] enemyTiles;                                 //AI prefabs
+        public GameObject[] enemy2Tiles;
 		
 		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
@@ -129,7 +131,7 @@ namespace Completed
 			}
 		}
 		
-		
+     	
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
@@ -144,10 +146,23 @@ namespace Completed
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = 3;
-			
-			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
-            LayoutObjectAtRandom (playerTiles, enemyCount, enemyCount);
+
+            //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
+            if (mode == 0)
+            {
+                LayoutObjectAtRandom(playerTiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(player2Tiles, enemyCount, enemyCount);
+            }
+            else if(mode == 1)
+            {
+                LayoutObjectAtRandom(enemy2Tiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(playerTiles, enemyCount, enemyCount);
+            }
+            else
+            {
+                LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(enemy2Tiles, enemyCount, enemyCount);
+            }
         }
 	}
 }

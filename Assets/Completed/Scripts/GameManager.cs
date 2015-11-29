@@ -14,19 +14,23 @@ namespace Completed
         public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
         [HideInInspector]
         public bool playersTurn = true;     //Boolean to check if it's players turn, hidden in inspector but public.
+        public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
 
         private Text levelText;                                 //Text to display current level number.
         private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
         private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
         private int level = 1;                                  //Current level number, expressed in game as "Day 1".
-        private List<Enemy> enemies;                            //List of all Enemy units, used to issue them move commands.
+        //private List<Enemy> enemies;                            //List of all Enemy units, used to issue them move commands.
         private bool enemiesMoving;                             //Boolean to check if enemies are moving.
         private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
 
         public int curTeam = 0;
         public List<Player> player0;
         public List<Player> player1;
+
+        public List<Enemy> enemy0;
+        public List<Enemy> enemy1;
         public Player captain;
         //Awake is always called before any Start functions
         void Awake()
@@ -45,9 +49,17 @@ namespace Completed
 
             //Sets this to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
-
+            mode = BoardManager.mode;
             //Assign enemies to a new List of Enemy objects.
-            enemies = new List<Enemy>();
+            if(mode == 1)
+            {
+                enemy0 = new List<Enemy>();
+            }
+            else if(mode == 2)
+            {
+                enemy1 = new List<Enemy>();
+            }
+            
 
             //Get a component reference to the attached BoardManager script
             boardScript = GetComponent<BoardManager>();
@@ -60,17 +72,21 @@ namespace Completed
         {
 
             Debug.Log("Current team: " + curTeam);
-            if (curTeam == 0)
+            if (mode == 0) // PlayervPlayer
             {
-                setTurn(player1, true);
-                setTurn(player0, false);
-                curTeam = 1;
-            }
-            else {
-                setTurn(player0, true);
-                setTurn(player1, false);
-                curTeam = 0;
-            }
+                if (curTeam == 0)
+                {
+                    setTurn(player1, true);
+                    setTurn(player0, false);
+                    curTeam = 1;
+                }
+                else
+                {
+                    setTurn(player0, true);
+                    setTurn(player1, false);
+                    curTeam = 0;
+                }
+            } 
         }
 
         /*
@@ -153,13 +169,17 @@ namespace Completed
             Invoke("HideLevelImage", levelStartDelay);
 
             //Clear any Enemy objects in our List to prepare for next level.
-            enemies.Clear();
+            //enemies.Clear();
 
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(level);
 
         }
 
+        public void setMode(int i)
+        {
+            mode = i;
+        }
 
         //Hides black image used between levels
         void HideLevelImage()
@@ -197,10 +217,15 @@ namespace Completed
         }
 
         //Call this to add the passed in Enemy to the List of Enemy objects.
-        public void AddEnemyToList(Enemy script)
+        public void AddEnemyToList(Enemy script, int team)
         {
             //Add Enemy to List enemies.
-            enemies.Add(script);
+            //enemies.Add(script);
+            if (team == 0)
+            {
+                enemy0.Add(script);
+            }
+            else enemy1.Add(script);
         }
 
 
@@ -218,7 +243,7 @@ namespace Completed
         }
 
         //Coroutine to move enemies in sequence.
-        IEnumerator MoveEnemies()
+       /*IEnumerator MoveEnemies()
         {
             //While enemiesMoving is true player is unable to move.
             enemiesMoving = true;
@@ -247,6 +272,6 @@ namespace Completed
 
             //Enemies are done moving, set enemiesMoving to false.
             enemiesMoving = false;
-        }
+        } */
     }
 }
