@@ -73,20 +73,9 @@ MonoBehaviour:
   - {fileID: 106160, guid: 038998774947c4a8fa170d5b4492a7dd, type: 2}
   wallTiles:
   - {fileID: 110520, guid: 2570048905bd94d6f8a99d13b80daf90, type: 2}
-  - {fileID: 110520, guid: b86334000bc0f47ba8dd33ea88cfcdb1, type: 2}
-  - {fileID: 110520, guid: 01ca47a83ebe24ca5a2f6b1d6dcd7481, type: 2}
-  - {fileID: 110520, guid: 022eda2f1f0cb45e28ff6840b68928bc, type: 2}
-  - {fileID: 110520, guid: e1816487b15cd4c5fbd9587521e068ca, type: 2}
-  - {fileID: 110520, guid: 5ddc2d7828b2d462286f09274199ad9a, type: 2}
-  - {fileID: 110520, guid: 64139c47b57e34c5fa97fd79f8d25244, type: 2}
-  - {fileID: 110520, guid: 741804431f4d341cdae1f15b3896aeff, type: 2}
   playerTiles:
   - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
-  - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
-  - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
   player2Tiles:
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
   - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
   outerWallTiles:
   - {fileID: 110520, guid: 7094f72151ec74f569c4e03f1ec0f8e7, type: 2}
@@ -94,11 +83,7 @@ MonoBehaviour:
   - {fileID: 138320, guid: efc757259c3ada34abf3be743c5aea73, type: 2}
   enemyTiles:
   - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
-  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
-  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
   enemy2Tiles:
-  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
-  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
   - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
 --- !u!1001 &100100000
 Prefab:
@@ -108,12 +93,16 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: wallTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: blockTiles.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: floorTiles.Array.size
@@ -121,15 +110,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: enemy2Tiles.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: player2Tiles.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: outerWallTiles.Array.size
@@ -235,6 +224,74 @@ Prefab:
       propertyPath: outerWallTiles.Array.data[2]
       value: 
       objectReference: {fileID: 110520, guid: e85c94355cc4641da919bd5d0ac956d4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[5]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[6]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[7]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[8]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[9]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[10]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[11]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: enemyTiles.Array.data[12]
+      value: 
+      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 110520, guid: b86334000bc0f47ba8dd33ea88cfcdb1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 110520, guid: 01ca47a83ebe24ca5a2f6b1d6dcd7481, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 110520, guid: 022eda2f1f0cb45e28ff6840b68928bc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 110520, guid: e1816487b15cd4c5fbd9587521e068ca, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[5]
+      value: 
+      objectReference: {fileID: 110520, guid: 5ddc2d7828b2d462286f09274199ad9a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[6]
+      value: 
+      objectReference: {fileID: 110520, guid: 64139c47b57e34c5fa97fd79f8d25244, type: 2}
+    - target: {fileID: 0}
+      propertyPath: wallTiles.Array.data[7]
+      value: 
+      objectReference: {fileID: 110520, guid: 741804431f4d341cdae1f15b3896aeff, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133658}
