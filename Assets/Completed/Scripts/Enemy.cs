@@ -68,7 +68,6 @@ namespace Completed
 		//MoveEnemy is called by the GameManger each turn to tell each Enemy to try to move towards the player.
 		public void MoveEnemy ()
 		{
-            Debug.Log(stepsLeft + " fuck this");
             while (stepsLeft != 0)
             {
                 List<GameObject> validMoves = showValidTiles(1);

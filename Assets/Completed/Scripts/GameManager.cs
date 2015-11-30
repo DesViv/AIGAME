@@ -13,7 +13,6 @@ namespace Completed
         public int playerFoodPoints = 100;                      //Starting value for Player food points.
         public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
         [HideInInspector]
-        public bool playersTurn = true;     //Boolean to check if it's players turn, hidden in inspector but public.
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
 
@@ -21,17 +20,18 @@ namespace Completed
         private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
         private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
         private int level = 1;                                  //Current level number, expressed in game as "Day 1".
-        //private List<Enemy> enemies;                            //List of all Enemy units, used to issue them move commands.
-        private bool enemiesMoving;                             //Boolean to check if enemies are moving.
         private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
 
         public int curTeam = 0;
+
+        //Every time a Player is added to the game board, it will add itself to one of these lists based on the team it's on in start() of Player.cs
         public List<Player> player0;
         public List<Player> player1;
 
+
+        //Every time an Enemy is added to the game board, it will add itself to one of these lists based on the team it's on by calling AddEnemyToList in start() of Enemy.cs
         public List<Enemy> enemy0;
-        public List<Enemy> enemy1;
-        public Player captain;
+        public List<Enemy> enemy1;  
         //Awake is always called before any Start functions
         void Awake()
         {
@@ -55,7 +55,7 @@ namespace Completed
             {
                 enemy0 = new List<Enemy>();
             }
-            else if(mode == 2)
+            if(mode == 2)
             {
                 enemy1 = new List<Enemy>();
             }
@@ -68,9 +68,11 @@ namespace Completed
             InitGame();
         }
 
+        /*
+         * Goes through a list of enemies/players, sets their turn to true/false and resets their stepsleft to 5
+         */ 
         public void endTurn()
         {
-
             Debug.Log("Current team: " + curTeam);
             Debug.Log(mode);
             if (mode == 0) // PlayervPlayer
@@ -127,11 +129,10 @@ namespace Completed
         }
 
         /*
-         * Makes way more sense to make another class to store teams, but I'm just trying to get something working for now and this was easy
+         * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to 5
          */
         public void setTurn(List<Player> stuff, bool set)
         {
-            Debug.Log(stuff.Count + " fuckin up the count");
             foreach (Player temp in stuff)
             {
                 temp.setTurn(set);
@@ -141,6 +142,11 @@ namespace Completed
             }
         }
 
+        /*
+         * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to 5
+         * At the moment, Enemies will automatically end their turn once they run out of moves, we need to change that so it's up to 
+         * whoever is implementing an AI algorithm TODO
+         */
         public void setEnemyTurn(List<Enemy> stuff, bool set)
         {
             foreach (Enemy temp in stuff)
@@ -151,6 +157,13 @@ namespace Completed
                     //temp.endPlayerTurn();
             }
         }
+
+        /*
+         * Sets the current team whose turn it is
+         * in Mode 0(PvP) one list of players will be on team0 and another on team1
+         * in Mode 1(PvE) the players will be on team0 and the enemies on team1
+         * in Mode 2(EvE) one list of enemies will be on team0 and the other on team1
+         */
         public void setCurTeam(int team)
         {
             curTeam = team;
@@ -160,6 +173,9 @@ namespace Completed
         /*
          * When a unit dies, remove them from the list
          * then check for win condition
+         * Each player unit checks to see if it's dead when it gets attacked in Player.cs attack()
+         * If it dies, it will call this function so the gamemanager can remove it from the list and destroy it's corresponding GameObject
+         * 
          */
         public void removePlayer(Player dead, int team)
         {
@@ -240,7 +256,7 @@ namespace Completed
             //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
             Invoke("HideLevelImage", levelStartDelay);
 
-            //Clear any Enemy objects in our List to prepare for next level.
+            //Clear any Player/Enemy objects in our List to prepare for next level.
             enemy0.Clear();
             enemy1.Clear();
             player0.Clear();
@@ -251,6 +267,9 @@ namespace Completed
 
         }
 
+        /*
+         * Used to set the mode
+         */ 
         public void setMode(int i)
         {
             mode = i;
@@ -268,31 +287,13 @@ namespace Completed
 
         //Update is called every frame.
         void Update()
-        {
-            mode = BoardManager.mode;
-           /* bool continueGame = true;
-			for (int i = 0; i < players.Count; i++) {
-                continueGame = false;
-				Debug.Log (players[i].alive);
-				if (players[i].alive) {
-					continueGame = true;
-					break;
-				}
-			}
-            if (continueGame == false) {
-					GameOver();
-		    }
-            //Check that playersTurn or enemiesMoving or doingSetup are not currently true.
-            if (playersTurn || enemiesMoving || doingSetup)
-
-                //If any of these are true, return and do not start MoveEnemies.
-                return;
-
-            //Start moving enemies.
-            StartCoroutine(MoveEnemies());*/
+        { 
+            mode = BoardManager.mode;         
         }
 
-        //Call this to add the passed in Enemy to the List of Enemy objects.
+        /*
+         * Enemies call this function in their start() method
+         */ 
         public void AddEnemyToList(Enemy script, int team)
         {
             //Add Enemy to List enemies.
@@ -304,26 +305,12 @@ namespace Completed
             else enemy1.Add(script);
         }
 
-
-        //GameOver is called when the player reaches 0 food points
-        public void GameOver()
-        {
-            //Set levelText to display number of levels passed and game over message
-            levelText.text = "After " + level + " days, you starved.";
-
-            //Enable black background image gameObject.
-            levelImage.SetActive(true);
-
-            //Disable this GameManager.
-            enabled = false;
-        }
-
         //Coroutine to move enemies in sequence.
+        //Currently this is being called in endturn() to move our enemies
        IEnumerator MoveEnemies(List<Enemy> enemies)
         {
             Debug.Log("We made it");
             //While enemiesMoving is true player is unable to move.
-            enemiesMoving = true;
             //Wait for turnDelay seconds, defaults to .1 (100 ms).
             yield return new WaitForSeconds(turnDelay);               
                 //If there are no enemies spawned (IE in first level):
@@ -341,11 +328,6 @@ namespace Completed
                     //Wait for Enemy's moveTime before moving next Enemy,
                     yield return new WaitForSeconds(enemies[i].moveTime);
                 }
-                //Once Enemies are done moving, set playersTurn to true so player can move.
-                playersTurn = true;
-
-                //Enemies are done moving, set enemiesMoving to false.
-                enemiesMoving = false;
             endTurn();           
            
         }

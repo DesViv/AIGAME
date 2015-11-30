@@ -9,14 +9,21 @@
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 namespace Completed
 {
+    
 	public abstract class Strategy
 	{
-		abstract public int[] returnMove(Enemy enemy);
-		abstract public int[][] getMoveList(Enemy enemy);
+        public int mode; //0 = PvP, 1 = PvE, 2 = EvE
+        public List<Enemy> enemy0;
+        public List<Enemy> enemy1;
+    
+
+		abstract public Vector3[] returnMove(Enemy enemy);
+		abstract public Vector3[] getMoveList(Enemy enemy);
 		abstract public int evaluateMoveUtility(String move);
-		abstract public int[][] returnMoves(List<Enemy> enemies);
+		abstract public Vector3[] returnMoves(List<Enemy> enemies);
 		abstract public int evaluateDamage(List<Player> players, Enemy enemy);
 	}
 }
