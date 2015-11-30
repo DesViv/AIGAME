@@ -20,17 +20,21 @@ namespace Completed
 		public AudioClip drinkSound1;				//1 of 2 Audio clips to play when player collects a soda object.
 		public AudioClip drinkSound2;				//2 of 2 Audio clips to play when player collects a soda object.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
-        public int team;                          //player 1 or 2
-        public int health;
-        public int attackPower;
+        
         public bool myTurn;
         public Color myColor;
         private Animator animator;					//Used to store a reference to the Player's animator component.
 		private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 
 
+        // All of these values are being set in the Player prefab
+        public int team;                          //player 1 or 2
+        public int health;
+        public int attackPower;
         public int moveRange;
         public int stepsLeft;
+        //
+
         private Text stepsLeftText;
         private Button endAction;
         private Text attackText;

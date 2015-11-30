@@ -27,6 +27,10 @@ namespace Completed
 
        public static int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
+        /// <summary>
+        /// All of these values/arrays are being set/filled in the GameManager prefab, except for mode
+        /// </summary>
+
 		public int columns = 20; 										//Number of columns in our game board.
 		public int rows = 20;											//Number of rows in our game board.
 		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.

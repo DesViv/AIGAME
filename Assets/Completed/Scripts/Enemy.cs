@@ -8,24 +8,28 @@ namespace Completed
 	//Enemy inherits from MovingObject, our base class for objects that can move, Player also inherits from this.
 	public class Enemy : MovingObject
 	{
-		public int playerDamage; 							//The amount of food points to subtract from the player when attacking.
+	
 		public AudioClip attackSound1;						//First of two audio clips to play when attacking the player.
 		public AudioClip attackSound2;						//Second of two audio clips to play when attacking the player.
-		public int health;
-        public int attackPower;
-		public bool alive;
+		
+		public bool alive; // Don't really need this, keeping it for now
 		private Animator animator;							//Variable of type Animator to store a reference to the enemy's Animator component.
 		private Transform target;							//Transform to attempt to move toward each turn.
 		private bool skipMove;                              //Boolean to determine whether or not enemy should skip a turn or move this turn.
-
         public int team;
         private Text attackText;
         private Text healthText;
-        public int moveRange;
+        
         //Moves a unit can make each turn
-        public int stepsLeft;
+        
         Vector3 currentPos;
+
         public bool myTurn;
+        // All of these values are being set in the Enemy/Enemy2 prefabs
+        public int health;
+        public int attackPower;
+        public int stepsLeft;
+        public int moveRange;
         //Start overrides the virtual Start function of the base class.
         protected override void Start ()
 		{
