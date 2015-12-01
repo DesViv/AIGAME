@@ -21,9 +21,6 @@ namespace Completed
         private Text healthText;
 
         //Moves a unit can make each turn
-
-        public Vector3 currentPos;
-
         public bool myTurn;
         // All of these values are being set in the Enemy/Enemy2 prefabs
         public int health;
