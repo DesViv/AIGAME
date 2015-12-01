@@ -1,7 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIGAME.CSharp", "AIGAME.CSharp.csproj", "{9E635B55-933F-7679-0C74-57AD5633E803}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{D2BCBDC1-7AB3-77D0-623F-09CDD5FAD182}") = "AIGAME", "Assembly-CSharp.csproj", "{F9404347-12EF-57C7-5856-A1888054D674}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,16 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E635B55-933F-7679-0C74-57AD5633E803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E635B55-933F-7679-0C74-57AD5633E803}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E635B55-933F-7679-0C74-57AD5633E803}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E635B55-933F-7679-0C74-57AD5633E803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9404347-12EF-57C7-5856-A1888054D674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9404347-12EF-57C7-5856-A1888054D674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9404347-12EF-57C7-5856-A1888054D674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9404347-12EF-57C7-5856-A1888054D674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-<<<<<<< HEAD
-																																			GlobalSection(MonoDevelopProperties) = preSolution
+																																					GlobalSection(MonoDevelopProperties) = preSolution
 =======
 <<<<<<< HEAD
 =======
@@ -46,5 +45,4 @@ Global
 		$3.scope = text/plain
 	EndGlobalSection
 
->>>>>>> 1258bc26e1e85f2ccb7bcace8dd29a4902c1cacd
 EndGlobal

@@ -14,9 +14,9 @@ public class StartButton : MonoBehaviour {
 	
 	}
     
-    public void StartGame(int index)
+    public void StartMenu(string name)
     {
-        Application.LoadLevel(index);
+        Application.LoadLevel(name);
     }
 
     public void StartGamePvP(string name)
@@ -34,4 +34,9 @@ public class StartButton : MonoBehaviour {
         BoardManager.mode = 2;
         Application.LoadLevel(name);
     }
+
+	public void EndGame()
+	{
+		Application.Quit();
+	}
 }
