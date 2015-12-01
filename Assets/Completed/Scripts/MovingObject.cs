@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace Completed
 {
@@ -33,8 +34,10 @@ namespace Completed
 		public int attackPower;
 		public int moveRange;
 		public int stepsLeft;
-		//
-		// ---------- UNIT INFORMATION END ------------------------------------
+        public Text damageText;
+
+        //
+        // ---------- UNIT INFORMATION END ------------------------------------
 
 
         //Protected, virtual functions can be overridden by inheriting classes.
@@ -45,6 +48,8 @@ namespace Completed
 
             //Get a component reference to this object's Rigidbody2D
             rb2D = GetComponent<Rigidbody>();
+            damageText = GameObject.Find("Damage").GetComponent<Text>();
+
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
@@ -112,6 +117,24 @@ namespace Completed
                 //Return and loop until sqrRemainingDistance is close enough to zero to end the function
                 yield return null;
             }
+        }
+
+        public IEnumerator floatingText(Vector2 start, Vector2 end)
+        {
+            damageText.rectTransform.position = start;
+            damageText.enabled = true;
+            float duration = 1f;
+            float elapsedTime = 0;
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration; //0 means the animation just started, 1 means it finished
+                damageText.rectTransform.position = Vector2.Lerp(start, end, t);
+                elapsedTime += 2 * Time.deltaTime;
+                yield return null;
+            }
+
+            damageText.enabled = false;
+            yield return null;
         }
 
 

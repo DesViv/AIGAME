@@ -35,9 +35,7 @@ namespace Completed
         private bool attackPhase;
 
         public GameManager GM;
-        public GameObject FloatingDamagePrefab;
 
-        public Text damageText;
 
 
 
@@ -51,7 +49,6 @@ namespace Completed
             attackText = GameObject.Find("Attack").GetComponent<Text>();
             healthText = GameObject.Find("Health").GetComponent<Text>();
             endAction = GameObject.Find("EndTurn").GetComponent<Button>();
-            damageText = GameObject.Find("Damage").GetComponent<Text>();
 
             GM = GameObject.FindObjectOfType<GameManager>();
 
@@ -318,24 +315,6 @@ namespace Completed
             }
 
             return valid;
-        }
-
-        public IEnumerator floatingText(Vector2 start, Vector2 end)
-        {
-            damageText.rectTransform.position = start;
-            damageText.enabled = true;
-            float duration = 1f;
-            float elapsedTime = 0;
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration; //0 means the animation just started, 1 means it finished
-                damageText.rectTransform.position = Vector2.Lerp(start, end, t);
-                elapsedTime += 2*Time.deltaTime;
-                yield return null;
-            }
-
-            damageText.enabled = false;
-            yield return null;
         }
 
 
