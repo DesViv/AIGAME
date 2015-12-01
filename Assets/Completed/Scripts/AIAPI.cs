@@ -12,19 +12,48 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Completed
 {
-    
-	public abstract class Strategy
-	{
-        public int mode; //0 = PvP, 1 = PvE, 2 = EvE
-        public List<Enemy> enemy0;
-        public List<Enemy> enemy1;
-    
+    public class AIAction
+    {
+        public Enemy obj;
+        public enum Actions
+        {
+            Move,Attack
+        }
+        public Actions action;
+        public Vector3 pos;
 
-		abstract public Vector3[] returnMove(Enemy enemy);
-		abstract public Vector3[] getMoveList(Enemy enemy);
-		abstract public int evaluateMoveUtility(String move);
-		abstract public Vector3[] returnMoves(List<Enemy> enemies);
-		abstract public int evaluateDamage(List<Player> players, Enemy enemy);
+        public AIAction(Enemy o,Actions a,Vector3 p)
+        {
+            obj = o;
+            action = a;
+            pos = p;
+        }
+    }
+	public abstract class AIBase
+	{
+        public int Count
+        {
+            set { }
+            get { return self.Count; }
+        }
+        public int mode; //0 = PvP, 1 = PvE, 2 = EvE
+        public List<MovingObject> other;
+        public List<Enemy> self;
+        protected List<AIAction> actions;
+        public List<AIAction> acts
+        {
+            set { }
+            get { return actions; }
+        }
+        public virtual void onTurn()
+        {
+            actions = new List<AIAction>();
+        }
+        public void init(List<Enemy> s,List<MovingObject> o)
+        {
+            self = s;
+            other = o;
+        }
 	}
 }
 

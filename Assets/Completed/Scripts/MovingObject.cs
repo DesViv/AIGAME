@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 namespace Completed
 {
@@ -21,45 +20,31 @@ namespace Completed
         public bool firstClick = false;
         public List<GameObject> validMoves = new List<GameObject>();
         public List<Vector3> validPositions = new List<Vector3>();
-
         public List<GameObject> validAttack = new List<GameObject>();
+        public Vector3 currentPos;
 
-		// ---------- UNIT INFORMATION ----------------------------------------
-		public enum UnitType{Blocker, Breaker, Rusher}
-		public UnitType unitType;	// 0 - blocker; 1 - breaker; 2 - rusher
 
-		// All of these values are being set in the Player prefab
-		public int team;                          //player 1 or 2
-		public int health;
-		public int attackPower;
-		public int moveRange;
-		public int stepsLeft;
-        public Text damageText;
-
-        //
-        // ---------- UNIT INFORMATION END ------------------------------------
-
-		public int stepsLeftThisTurn;
-
-        //Protected, virtual functions can be overridden by inheriting classes.
-        protected virtual void Start()
+        //public, virtual functions can be overridden by inheriting classes.
+        public virtual void Start()
         {
             //Get a component reference to this object's BoxCollider2D
             boxCollider = GetComponent<BoxCollider>();
 
             //Get a component reference to this object's Rigidbody2D
             rb2D = GetComponent<Rigidbody>();
-            damageText = GameObject.Find("Damage").GetComponent<Text>();
-
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
         }
 
+        public virtual void showValidAttack()
+        {
+
+        }
 
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
-        protected int Move(int desX, int desY, List<Vector3> validP)
+        public int Move(int desX, int desY, List<Vector3> validP)
         {
             bool valid = false;
 
@@ -67,7 +52,8 @@ namespace Completed
 
             for (int i = 0; i < validP.Count; i++)
             {
-                if (des == validP[i]) {
+                if (des == validP[i])
+                {
                     valid = true;
                     break;
                 }
@@ -84,7 +70,7 @@ namespace Completed
                 int steps = xdif + ydif;
                 //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
                 StartCoroutine(SmoothMovement(des));
-
+                currentPos = des;
                 //Return true to say that Move was successful
                 Debug.Log(steps);
                 return steps;
@@ -96,8 +82,43 @@ namespace Completed
         }
 
 
+        public virtual void showValidTiles(int stepsLeft)
+        {
+            GameObject[] floors;
+            List<GameObject> validFloors = new List<GameObject>();
+            floors = GameObject.FindGameObjectsWithTag("Floor");
+            int curX = (int)transform.position.x;
+            int curY = (int)transform.position.y;
+
+            for (int i = 0; i < floors.Length; i++)
+            {
+                int fX = (int)floors[i].transform.position.x;
+                int fY = (int)floors[i].transform.position.y;
+                int xdif = Mathf.Abs(fX - curX);
+                int ydif = Mathf.Abs(fY - curY);
+                if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
+                {
+
+                    Vector3 rayOrigin = new Vector3(10, 10, -100);
+                    Vector3 rayDes = new Vector3(fX, fY, 0.1f);
+                    Vector3 rayDir = (rayDes - rayOrigin).normalized;
+                    Ray ray = new Ray(rayOrigin, rayDir);
+                    if (!Physics.Raycast(ray))
+                    {
+                        validFloors.Add(floors[i]);
+                        validPositions.Add(floors[i].transform.position);
+                    }
+                    else
+                    {
+                        //Debug.Log("wall at (" + fX + "," + fY + ")");
+                    }
+                }
+
+            }
+        }
+
         //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
-        protected IEnumerator SmoothMovement(Vector3 end)
+        public IEnumerator SmoothMovement(Vector3 end)
         {
             //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
             //Square magnitude is used instead of magnitude because it's computationally cheaper.
@@ -120,28 +141,10 @@ namespace Completed
             }
         }
 
-        public IEnumerator floatingText(Vector2 start, Vector2 end)
-        {
-            damageText.rectTransform.position = start;
-            damageText.enabled = true;
-            float duration = 1f;
-            float elapsedTime = 0;
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration; //0 means the animation just started, 1 means it finished
-                damageText.rectTransform.position = Vector2.Lerp(start, end, t);
-                elapsedTime += 2 * Time.deltaTime;
-                yield return null;
-            }
-
-            damageText.enabled = false;
-            yield return null;
-        }
-
 
         //The virtual keyword means AttemptMove can be overridden by inheriting classes using the override keyword.
         //AttemptMove takes a generic parameter T to specify the type of component we expect our unit to interact with if blocked (Player for Enemies, Wall for Player).
-        protected virtual void AttemptMove(int desX, int desY)
+        public virtual void AttemptMove(int desX, int desY)
         {
             /*//Hit will store whatever our linecast hits when Move is called.
 			RaycastHit2D hit;
@@ -167,7 +170,7 @@ namespace Completed
 
         //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
         //OnCantMove will be overriden by functions in the inheriting classes.
-        protected abstract void OnCantMove<T>(T component)
+        public abstract void OnCantMove<T>(T component)
             where T : Component;
     }
 }
