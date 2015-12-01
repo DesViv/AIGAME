@@ -50,7 +50,9 @@ namespace Completed
         //Awake is always called before any Start functions
         void Awake()
         {
-
+            ListAI.initAI();
+            blueAI = ListAI.AIPrograms["AISimple"];
+            redAI = ListAI.AIPrograms["AISimple"];
         }
 
 		public void confirmYes()
@@ -95,7 +97,7 @@ namespace Completed
 
         /*
          * Goes through a list of enemies/players, sets their turn to true/false and resets their stepsleft to 5
-         */ 
+         */
         public void endTurn()
         {
             Debug.Log("Current team: " + curTeam);
@@ -116,13 +118,13 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if(mode == 1) //PlayervEnemy
+            else if (mode == 1) //PlayervEnemy
             {
 
                 Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
                 if (curTeam == 0)
                 {
-                    setEnemyTurn(redComp, true);                    
+                    setEnemyTurn(redComp, true);
                     setTurn(bluePlayer, false);
                     curTeam = 1;
                     List<MovingObject> other = new List<MovingObject>();
@@ -141,8 +143,9 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if(mode == 2) //EvE
-            {
+            else if (mode == 2) //EvE
+            { 
+                Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
                 if (curTeam == 0)
                 {
                     setEnemyTurn(redComp, true);
@@ -276,8 +279,6 @@ namespace Completed
         //This is called each time a scene is loaded.
         void OnLevelWasLoaded(int index)
         {
-            blueAI = new AISimple();
-            redAI = new AISimple();
             //Check if instance already exists
             if (instance == null)
 

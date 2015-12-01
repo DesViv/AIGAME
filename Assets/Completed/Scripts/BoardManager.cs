@@ -114,7 +114,7 @@ namespace Completed
 		
 		
 		//LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
-		void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum, bool isPlayer)
+		void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum, bool isPlayer, bool inOrder)
 		{
 			//Choose a random number of objects to instantiate within the minimum and maximum limits
 			int objectCount = Random.Range (minimum, maximum+1);
@@ -124,9 +124,16 @@ namespace Completed
 			{
 				//Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
 				Vector3 randomPosition = RandomPosition();
-				
-				//Choose a random tile from tileArray and assign it to tileChoice
-				GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
+                GameObject tileChoice;
+                //Choose a random tile from tileArray and assign it to tileChoice
+                if (!inOrder)
+                {
+                    tileChoice = tileArray[Random.Range(0, tileArray.Length)];
+                }
+                else
+                {
+                    tileChoice = tileArray[i];
+                }
 
 				tileChoice.tag = (isPlayer ? "Player" : "Enemy");
 				
@@ -162,20 +169,20 @@ namespace Completed
             if (mode == 0)
             {
                 Debug.Log("mode 0");
-                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
-                LayoutObjectAtRandom(redPlayerTiles, enemyCount, enemyCount, true);
+                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true, true);
+                LayoutObjectAtRandom(redPlayerTiles, enemyCount, enemyCount, true, true);
             }
             else if(mode == 1)
             {
                 Debug.Log("mode 1");
-                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
-                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
+                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false, true);
+                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true, true);
             }
             else
             {
                 Debug.Log("mode 2");
-                LayoutObjectAtRandom(blueCompTiles, enemyCount, enemyCount, false);
-                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
+                LayoutObjectAtRandom(blueCompTiles, enemyCount, enemyCount, false, true);
+                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false, true);
             }
         }
 	}
