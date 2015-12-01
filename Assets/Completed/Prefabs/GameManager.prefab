@@ -65,10 +65,6 @@ MonoBehaviour:
   wallCount:
     minimum: 5
     maximum: 9
-  foodCount:
-    minimum: 1
-    maximum: 5
-  exit: {fileID: 110520, guid: cb0f3020bafec423aa31d0e491c4b811, type: 2}
   floorTiles:
   - {fileID: 106160, guid: 038998774947c4a8fa170d5b4492a7dd, type: 2}
   wallTiles:
@@ -86,13 +82,13 @@ MonoBehaviour:
   blockTiles:
   - {fileID: 138320, guid: efc757259c3ada34abf3be743c5aea73, type: 2}
   blueCompTiles:
-  - {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
-  - {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
-  - {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
+  - {fileID: 146652, guid: 670d08127a0e80d4b9bd803bedac9230, type: 2}
+  - {fileID: 146652, guid: 6c5dd262f16094b4bad4139888aa4b2e, type: 2}
+  - {fileID: 146652, guid: 9f3295e5850e9334eb326a86cb2242d0, type: 2}
   redCompTiles:
-  - {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
-  - {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
-  - {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
+  - {fileID: 146652, guid: 018cdc38c0b089843808a260c492cbe8, type: 2}
+  - {fileID: 146652, guid: 06619d46fd577e547bfca8fd956d908d, type: 2}
+  - {fileID: 146652, guid: f4dec31c8f7babe4ea35691dd402e154, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -319,27 +315,27 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: redCompTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+      objectReference: {fileID: 146652, guid: 018cdc38c0b089843808a260c492cbe8, type: 2}
     - target: {fileID: 0}
       propertyPath: redCompTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
+      objectReference: {fileID: 146652, guid: 06619d46fd577e547bfca8fd956d908d, type: 2}
     - target: {fileID: 0}
       propertyPath: redCompTiles.Array.data[2]
       value: 
-      objectReference: {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
+      objectReference: {fileID: 146652, guid: f4dec31c8f7babe4ea35691dd402e154, type: 2}
     - target: {fileID: 0}
       propertyPath: blueCompTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
+      objectReference: {fileID: 146652, guid: 670d08127a0e80d4b9bd803bedac9230, type: 2}
     - target: {fileID: 0}
       propertyPath: blueCompTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
+      objectReference: {fileID: 146652, guid: 6c5dd262f16094b4bad4139888aa4b2e, type: 2}
     - target: {fileID: 0}
       propertyPath: blueCompTiles.Array.data[2]
       value: 
-      objectReference: {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
+      objectReference: {fileID: 146652, guid: 9f3295e5850e9334eb326a86cb2242d0, type: 2}
     - target: {fileID: 0}
       propertyPath: redPlayerTiles.Array.data[0]
       value: 

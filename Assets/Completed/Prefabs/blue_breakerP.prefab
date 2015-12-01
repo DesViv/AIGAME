@@ -14,8 +14,8 @@ GameObject:
   - 212: {fileID: 21246652}
   - 222: {fileID: 22212718}
   m_Layer: 8
-  m_Name: red_blocker
-  m_TagString: Player
+  m_Name: blue_breakerP
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
   validMoves: []
   validPositions: []
   validAttack: []
-  unitType: 2
-  team: 1
+  unitType: 1
+  team: 0
   health: 15
   attackPower: 5
   moveRange: 1
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -900995045
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
+  m_Sprite: {fileID: 21300004, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!222 &22212718
 CanvasRenderer:
@@ -284,15 +284,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300018, guid: fbe1e7b94bb1a4a099d5bcb15a00141c,
+      objectReference: {fileID: 21300004, guid: fbe1e7b94bb1a4a099d5bcb15a00141c,
         type: 3}
     - target: {fileID: 0}
       propertyPath: unitType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: team
-      value: 1
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
