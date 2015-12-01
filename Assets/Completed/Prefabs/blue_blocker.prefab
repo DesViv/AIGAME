@@ -71,6 +71,11 @@ MonoBehaviour:
   validPositions: []
   validAttack: []
   unitType: 2
+  team: 0
+  health: 15
+  attackPower: 5
+  moveRange: 1
+  stepsLeft: 5
   restartLevelDelay: 1
   wallDamage: 1
   foodText: {fileID: 0}
@@ -83,11 +88,6 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: e2beefeb2273f4efe992adf5b8d67c29, type: 3}
   myTurn: 0
   myColor: {r: 1, g: 1, b: 1, a: 0}
-  team: 0
-  health: 15
-  attackPower: 5
-  moveRange: 1
-  stepsLeft: 5
   GM: {fileID: 0}
   FloatingDamagePrefab: {fileID: 0}
   damageText: {fileID: 0}

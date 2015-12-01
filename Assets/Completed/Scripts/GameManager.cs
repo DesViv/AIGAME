@@ -25,13 +25,13 @@ namespace Completed
         public int curTeam = 0;
 
         //Every time a Player is added to the game board, it will add itself to one of these lists based on the team it's on in start() of Player.cs
-        public List<Player> player0;
-        public List<Player> player1;
+        public List<Player> bluePlayer;
+        public List<Player> redPlayer;
 
 
         //Every time an Enemy is added to the game board, it will add itself to one of these lists based on the team it's on by calling AddEnemyToList in start() of Enemy.cs
-        public List<Enemy> enemy0;
-        public List<Enemy> enemy1;  
+        public List<Enemy> blueComp;
+        public List<Enemy> redComp;  
         //Awake is always called before any Start functions
         void Awake()
         {
@@ -53,11 +53,11 @@ namespace Completed
             //Assign enemies to a new List of Enemy objects.
             if(mode == 1)
             {
-                enemy0 = new List<Enemy>();
+                blueComp = new List<Enemy>();
             }
             if(mode == 2)
             {
-                enemy1 = new List<Enemy>();
+                redComp = new List<Enemy>();
             }
             
 
@@ -77,35 +77,35 @@ namespace Completed
             Debug.Log(mode);
             if (mode == 0) // PlayervPlayer
             {
-                Debug.Log(player0.Count + " IN WRONg MODE" + "    " + enemy1.Count);
+                Debug.Log(bluePlayer.Count + " IN WRONg MODE" + "    " + redComp.Count);
                 if (curTeam == 0)
                 {
-                    setTurn(player1, true);
-                    setTurn(player0, false);
+                    setTurn(redPlayer, true);
+                    setTurn(bluePlayer, false);
                     curTeam = 1;
                 }
                 else
                 {
-                    setTurn(player0, true);
-                    setTurn(player1, false);
+                    setTurn(bluePlayer, true);
+                    setTurn(redPlayer, false);
                     curTeam = 0;
                 }
             }
             else if(mode == 1) //PlayervEnemy
             {
 
-                Debug.Log(player0.Count + " Count" + "    " + enemy1.Count);
+                Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
                 if (curTeam == 0)
                 {
-                    setEnemyTurn(enemy1, true);                    
-                    setTurn(player0, false);
+                    setEnemyTurn(redComp, true);                    
+                    setTurn(bluePlayer, false);
                     curTeam = 1;
-                    StartCoroutine(MoveEnemies(enemy1));
+                    StartCoroutine(MoveEnemies(redComp));
                 }
                 else
                 {
-                    setTurn(player0, true);
-                    setEnemyTurn(enemy1, false);
+                    setTurn(bluePlayer, true);
+                    setEnemyTurn(redComp, false);
                     curTeam = 0;
                 }
             }
@@ -113,16 +113,16 @@ namespace Completed
             {
                 if (curTeam == 0)
                 {
-                    setEnemyTurn(enemy1, true);
-                    setEnemyTurn(enemy0, false);
-                    StartCoroutine(MoveEnemies(enemy1));
+                    setEnemyTurn(redComp, true);
+                    setEnemyTurn(blueComp, false);
+                    StartCoroutine(MoveEnemies(redComp));
                     curTeam = 1;
                 }
                 else
                 {
-                    setEnemyTurn(enemy0, true);
-                    setEnemyTurn(enemy1, false);
-                    StartCoroutine(MoveEnemies(enemy0));
+                    setEnemyTurn(blueComp, true);
+                    setEnemyTurn(redComp, false);
+                    StartCoroutine(MoveEnemies(blueComp));
                     curTeam = 0;
                 }
             }
@@ -181,21 +181,21 @@ namespace Completed
         {
             if(team == 0)
             {
-                player0.Remove(dead);
-                Debug.Log(player0.Count + " player0");
-                if(player0.Count == 0)
+                bluePlayer.Remove(dead);
+                Debug.Log(bluePlayer.Count + " player0");
+                if(bluePlayer.Count == 0)
                 {
                     Application.LoadLevel("GameOver");
                 }
             }
             else
             {
-                player1.Remove(dead);
-                if (player1.Count == 0)
+                redPlayer.Remove(dead);
+                if (redPlayer.Count == 0)
                 {
                     Application.LoadLevel("GameOver");
                 }
-                Debug.Log(player1.Count + " player1");
+                Debug.Log(redPlayer.Count + " player1");
             }
         }
 
@@ -207,21 +207,21 @@ namespace Completed
         {
             if (team == 0)
             {
-                enemy0.Remove(dead);
-                Debug.Log(enemy1.Count + " enemy1");
-                if (enemy1.Count == 0)
+                blueComp.Remove(dead);
+                Debug.Log(redComp.Count + " enemy1");
+                if (redComp.Count == 0)
                 {
                     Application.LoadLevel("GameOver");
                 }
             }
             else
             {
-                enemy1.Remove(dead);
-                if (enemy1.Count == 0)
+                redComp.Remove(dead);
+                if (redComp.Count == 0)
                 {
                     Application.LoadLevel("GameOver");
                 }
-                Debug.Log(enemy1.Count + " enemy1");
+                Debug.Log(redComp.Count + " enemy1");
             }
         }
 
@@ -257,10 +257,10 @@ namespace Completed
             Invoke("HideLevelImage", levelStartDelay);
 
             //Clear any Player/Enemy objects in our List to prepare for next level.
-            enemy0.Clear();
-            enemy1.Clear();
-            player0.Clear();
-            player1.Clear();
+            blueComp.Clear();
+            redComp.Clear();
+            bluePlayer.Clear();
+            redPlayer.Clear();
 
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(level);
@@ -300,9 +300,9 @@ namespace Completed
             //enemies.Add(script);
             if (team == 0)
             {
-                enemy0.Add(script);
+                blueComp.Add(script);
             }
-            else enemy1.Add(script);
+            else redComp.Add(script);
         }
 
         //Coroutine to move enemies in sequence.

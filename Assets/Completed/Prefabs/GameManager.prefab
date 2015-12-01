@@ -45,10 +45,10 @@ MonoBehaviour:
   playerFoodPoints: 100
   mode: 0
   curTeam: 0
-  player0: []
-  player1: []
-  enemy0: []
-  enemy1: []
+  bluePlayer: []
+  redPlayer: []
+  blueComp: []
+  redComp: []
 --- !u!114 &11433658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,22 +73,26 @@ MonoBehaviour:
   - {fileID: 106160, guid: 038998774947c4a8fa170d5b4492a7dd, type: 2}
   wallTiles:
   - {fileID: 110520, guid: 2570048905bd94d6f8a99d13b80daf90, type: 2}
-  playerTiles:
+  bluePlayerTiles:
   - {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
   - {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
   - {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
-  player2Tiles:
-  - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
+  redPlayerTiles:
+  - {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+  - {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
+  - {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
   outerWallTiles:
   - {fileID: 110520, guid: 7094f72151ec74f569c4e03f1ec0f8e7, type: 2}
   blockTiles:
   - {fileID: 138320, guid: efc757259c3ada34abf3be743c5aea73, type: 2}
-  enemyTiles:
+  blueCompTiles:
+  - {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
+  - {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
+  - {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
+  redCompTiles:
   - {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
   - {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
   - {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
-  enemy2Tiles:
-  - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -125,8 +129,24 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: redCompTiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: blueCompTiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: outerWallTiles.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: redPlayerTiles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bluePlayerTiles.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: columns
@@ -296,6 +316,54 @@ Prefab:
       propertyPath: wallTiles.Array.data[7]
       value: 
       objectReference: {fileID: 110520, guid: 741804431f4d341cdae1f15b3896aeff, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redCompTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redCompTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redCompTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
+    - target: {fileID: 0}
+      propertyPath: blueCompTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: blueCompTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
+    - target: {fileID: 0}
+      propertyPath: blueCompTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redPlayerTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redPlayerTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: redPlayerTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bluePlayerTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bluePlayerTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bluePlayerTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133658}

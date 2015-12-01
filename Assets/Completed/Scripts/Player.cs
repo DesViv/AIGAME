@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;   //Allows us to use UI.
 using System.Collections.Generic;
@@ -25,15 +25,6 @@ namespace Completed
         public Color myColor;
         private Animator animator;					//Used to store a reference to the Player's animator component.
 		private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
-
-
-        // All of these values are being set in the Player prefab
-        public int team;                          //player 1 or 2
-        public int health;
-        public int attackPower;
-        public int moveRange;
-        public int stepsLeft;
-        //
 
         private Text stepsLeftText;
         private Button endAction;
@@ -72,9 +63,9 @@ namespace Completed
             {
                 //Player 1 always goes first
                 this.myTurn = true;
-                GM.player0.Add(this);
+                GM.bluePlayer.Add(this);
             }
-            else GM.player1.Add(this);
+            else GM.redPlayer.Add(this);
 
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
@@ -89,7 +80,7 @@ namespace Completed
 
 		void OnMouseDown()
         {
-            
+			Debug.Log ("myTurn = " + myTurn);   
             if (myTurn)//   &&  (GM.curPlayer==null|| GM.curPlayer == this))
             {
                 Debug.Log(this.GetType());

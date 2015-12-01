@@ -34,16 +34,14 @@ namespace Completed
 		public int columns = 20; 										//Number of columns in our game board.
 		public int rows = 20;											//Number of rows in our game board.
 		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.
-		public Count foodCount = new Count (1, 5);						//Lower and upper limit for our random number of food items per level.
-		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] wallTiles;									//Array of wall prefabs.
-		public GameObject[] playerTiles;								//Player prefabs
-        public GameObject[] player2Tiles;
+		public GameObject[] bluePlayerTiles;								//Player prefabs
+        public GameObject[] redPlayerTiles;
         public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
         public GameObject[] blockTiles;
-        public GameObject[] enemyTiles;                                 //AI prefabs
-        public GameObject[] enemy2Tiles;
+        public GameObject[] blueCompTiles;                                 //AI prefabs
+        public GameObject[] redCompTiles;
 		
 		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
@@ -116,7 +114,7 @@ namespace Completed
 		
 		
 		//LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
-		void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum)
+		void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum, bool isPlayer)
 		{
 			//Choose a random number of objects to instantiate within the minimum and maximum limits
 			int objectCount = Random.Range (minimum, maximum+1);
@@ -129,6 +127,8 @@ namespace Completed
 				
 				//Choose a random tile from tileArray and assign it to tileChoice
 				GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
+
+				tileChoice.tag = (isPlayer ? "Player" : "Enemy");
 				
 				//Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
 				Instantiate(tileChoice, randomPosition, Quaternion.identity);
@@ -146,7 +146,7 @@ namespace Completed
 			InitialiseList ();
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (blockTiles, wallCount.minimum, wallCount.maximum);
+			//LayoutObjectAtRandom (blockTiles, wallCount.minimum, wallCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = 3;
@@ -154,18 +154,18 @@ namespace Completed
             //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
             if (mode == 0)
             {
-                LayoutObjectAtRandom(playerTiles, enemyCount, enemyCount);
-                LayoutObjectAtRandom(player2Tiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
+                LayoutObjectAtRandom(redPlayerTiles, enemyCount, enemyCount, true);
             }
             else if(mode == 1)
             {
-                LayoutObjectAtRandom(enemy2Tiles, enemyCount, enemyCount);
-                LayoutObjectAtRandom(playerTiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
+                LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
             }
             else
             {
-                LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
-                LayoutObjectAtRandom(enemy2Tiles, enemyCount, enemyCount);
+                LayoutObjectAtRandom(blueCompTiles, enemyCount, enemyCount, false);
+                LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
             }
         }
 	}
