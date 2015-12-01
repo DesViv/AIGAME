@@ -323,8 +323,7 @@ namespace Completed
                 //Loop through List of Enemy objects.
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                //Call the MoveEnemy function of Enemy at index i in the enemies List.
-                enemies[i].MoveEnemy();
+                    //Call the MoveEnemy function of Enemy at index i in the enemies List.
                     //Wait for Enemy's moveTime before moving next Enemy,
                     yield return new WaitForSeconds(enemies[i].moveTime);
                 }
