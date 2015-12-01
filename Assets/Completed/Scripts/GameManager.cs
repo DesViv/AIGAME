@@ -64,13 +64,13 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if(mode == 1) //PlayervEnemy
+            else if (mode == 1) //PlayervEnemy
             {
 
                 Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
                 if (curTeam == 0)
                 {
-                    setEnemyTurn(redComp, true);                    
+                    setEnemyTurn(redComp, true);
                     setTurn(bluePlayer, false);
                     curTeam = 1;
                     List<MovingObject> other = new List<MovingObject>();
@@ -89,8 +89,9 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if(mode == 2) //EvE
-            {
+            else if (mode == 2) //EvE
+            { 
+                Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
                 if (curTeam == 0)
                 {
                     setEnemyTurn(redComp, true);

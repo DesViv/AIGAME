@@ -86,7 +86,7 @@ MonoBehaviour:
   - {fileID: 146652, guid: 6c5dd262f16094b4bad4139888aa4b2e, type: 2}
   - {fileID: 146652, guid: 9f3295e5850e9334eb326a86cb2242d0, type: 2}
   redCompTiles:
-  - {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+  - {fileID: 136462, guid: 018cdc38c0b089843808a260c492cbe8, type: 2}
   - {fileID: 146652, guid: 06619d46fd577e547bfca8fd956d908d, type: 2}
   - {fileID: 146652, guid: f4dec31c8f7babe4ea35691dd402e154, type: 2}
 --- !u!1001 &100100000
@@ -315,7 +315,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: redCompTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+      objectReference: {fileID: 136462, guid: 018cdc38c0b089843808a260c492cbe8, type: 2}
     - target: {fileID: 0}
       propertyPath: redCompTiles.Array.data[1]
       value: 
