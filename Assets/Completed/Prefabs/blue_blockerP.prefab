@@ -76,6 +76,7 @@ MonoBehaviour:
   attackPower: 4
   moveRange: 1
   stepsLeft: 5
+  stepsLeftThisTurn: 0
   restartLevelDelay: 1
   wallDamage: 1
   myTurn: 0
