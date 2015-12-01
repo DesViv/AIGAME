@@ -70,17 +70,24 @@ MonoBehaviour:
   validMoves: []
   validPositions: []
   validAttack: []
-  unitType: 2
+  currentPos: {x: 0, y: 0, z: 0}
+  restartLevelDelay: 1
+  wallDamage: 1
+  foodText: {fileID: 0}
+  moveSound1: {fileID: 0}
+  moveSound2: {fileID: 0}
+  eatSound1: {fileID: 0}
+  eatSound2: {fileID: 0}
+  drinkSound1: {fileID: 0}
+  drinkSound2: {fileID: 0}
+  gameOverSound: {fileID: 0}
+  myTurn: 0
+  myColor: {r: 1, g: 1, b: 1, a: 0}
   team: 0
   health: 10
   attackPower: 4
   moveRange: 1
   stepsLeft: 8
-  stepsLeftThisTurn: 0
-  restartLevelDelay: 1
-  wallDamage: 1
-  myTurn: 0
-  myColor: {r: 1, g: 1, b: 1, a: 0}
   GM: {fileID: 0}
   FloatingDamagePrefab: {fileID: 0}
   damageText: {fileID: 0}
@@ -102,7 +109,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}

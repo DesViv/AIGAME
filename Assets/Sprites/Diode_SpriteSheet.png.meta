@@ -1,8 +1,10 @@
 fileFormatVersion: 2
 guid: fbe1e7b94bb1a4a099d5bcb15a00141c
+timeCreated: 1448945721
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Scavengers_SpriteSheet_0
+    21300000: Diode_SpriteSheet_0
     21300002: Scavengers_SpriteSheet_1
     21300004: Scavengers_SpriteSheet_2
     21300006: Scavengers_SpriteSheet_3
@@ -58,6 +60,48 @@ TextureImporter:
     21300106: Scavengers_SpriteSheet_53
     21300108: Scavengers_SpriteSheet_54
     21300110: Scavengers_SpriteSheet_55
+    21300112: Diode_SpriteSheet_1
+    21300114: Diode_SpriteSheet_2
+    21300116: Diode_SpriteSheet_3
+    21300118: Diode_SpriteSheet_4
+    21300120: Diode_SpriteSheet_5
+    21300122: Diode_SpriteSheet_6
+    21300124: Diode_SpriteSheet_7
+    21300126: Diode_SpriteSheet_8
+    21300128: Diode_SpriteSheet_9
+    21300130: Diode_SpriteSheet_10
+    21300132: Diode_SpriteSheet_11
+    21300134: Diode_SpriteSheet_12
+    21300136: Diode_SpriteSheet_13
+    21300138: Diode_SpriteSheet_14
+    21300140: Diode_SpriteSheet_15
+    21300142: Diode_SpriteSheet_16
+    21300144: Diode_SpriteSheet_17
+    21300146: Diode_SpriteSheet_18
+    21300148: Diode_SpriteSheet_19
+    21300150: Diode_SpriteSheet_20
+    21300152: Diode_SpriteSheet_21
+    21300154: Diode_SpriteSheet_22
+    21300156: Diode_SpriteSheet_23
+    21300158: Diode_SpriteSheet_24
+    21300160: Diode_SpriteSheet_25
+    21300162: Diode_SpriteSheet_26
+    21300164: Diode_SpriteSheet_27
+    21300166: Diode_SpriteSheet_28
+    21300168: Diode_SpriteSheet_29
+    21300170: Diode_SpriteSheet_30
+    21300172: Diode_SpriteSheet_31
+    21300174: Diode_SpriteSheet_32
+    21300176: Diode_SpriteSheet_33
+    21300178: Diode_SpriteSheet_34
+    21300180: Diode_SpriteSheet_35
+    21300182: Diode_SpriteSheet_36
+    21300184: Diode_SpriteSheet_37
+    21300186: Diode_SpriteSheet_38
+    21300188: Diode_SpriteSheet_39
+    21300190: Diode_SpriteSheet_40
+    21300192: Diode_SpriteSheet_41
+    21300194: Diode_SpriteSheet_42
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -104,7 +148,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Scavengers_SpriteSheet_0
+    - name: Diode_SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,9 +156,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_1
+    - name: Diode_SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -122,9 +166,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_2
+    - name: Diode_SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -132,59 +176,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_8
+    - name: Diode_SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -194,7 +188,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_9
+    - name: Diode_SpriteSheet_4
       rect:
         serializedVersion: 2
         x: 32
@@ -204,7 +198,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_10
+    - name: Diode_SpriteSheet_5
       rect:
         serializedVersion: 2
         x: 64
@@ -214,57 +208,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_11
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_12
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_13
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_14
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_15
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_16
+    - name: Diode_SpriteSheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -274,7 +218,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_17
+    - name: Diode_SpriteSheet_7
       rect:
         serializedVersion: 2
         x: 32
@@ -284,27 +228,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_18
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_19
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_20
+    - name: Diode_SpriteSheet_8
       rect:
         serializedVersion: 2
         x: 128
@@ -314,7 +238,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_21
+    - name: Diode_SpriteSheet_9
       rect:
         serializedVersion: 2
         x: 160
@@ -324,7 +248,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_22
+    - name: Diode_SpriteSheet_10
       rect:
         serializedVersion: 2
         x: 192
@@ -334,7 +258,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_23
+    - name: Diode_SpriteSheet_11
       rect:
         serializedVersion: 2
         x: 224
@@ -344,7 +268,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_24
+    - name: Diode_SpriteSheet_12
       rect:
         serializedVersion: 2
         x: 0
@@ -354,7 +278,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_25
+    - name: Diode_SpriteSheet_13
       rect:
         serializedVersion: 2
         x: 32
@@ -364,7 +288,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_26
+    - name: Diode_SpriteSheet_14
       rect:
         serializedVersion: 2
         x: 64
@@ -374,7 +298,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_27
+    - name: Diode_SpriteSheet_15
       rect:
         serializedVersion: 2
         x: 96
@@ -384,7 +308,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_28
+    - name: Diode_SpriteSheet_16
       rect:
         serializedVersion: 2
         x: 128
@@ -394,7 +318,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_29
+    - name: Diode_SpriteSheet_17
       rect:
         serializedVersion: 2
         x: 160
@@ -404,7 +328,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_30
+    - name: Diode_SpriteSheet_18
       rect:
         serializedVersion: 2
         x: 192
@@ -414,7 +338,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_31
+    - name: Diode_SpriteSheet_19
       rect:
         serializedVersion: 2
         x: 224
@@ -424,7 +348,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_32
+    - name: Diode_SpriteSheet_20
       rect:
         serializedVersion: 2
         x: 0
@@ -434,7 +358,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_33
+    - name: Diode_SpriteSheet_21
       rect:
         serializedVersion: 2
         x: 32
@@ -444,7 +368,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_34
+    - name: Diode_SpriteSheet_22
       rect:
         serializedVersion: 2
         x: 64
@@ -454,7 +378,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_35
+    - name: Diode_SpriteSheet_23
       rect:
         serializedVersion: 2
         x: 96
@@ -464,7 +388,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_36
+    - name: Diode_SpriteSheet_24
       rect:
         serializedVersion: 2
         x: 128
@@ -474,7 +398,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_37
+    - name: Diode_SpriteSheet_25
       rect:
         serializedVersion: 2
         x: 160
@@ -484,7 +408,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_38
+    - name: Diode_SpriteSheet_26
       rect:
         serializedVersion: 2
         x: 192
@@ -494,7 +418,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_39
+    - name: Diode_SpriteSheet_27
       rect:
         serializedVersion: 2
         x: 224
@@ -504,7 +428,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_40
+    - name: Diode_SpriteSheet_28
       rect:
         serializedVersion: 2
         x: 0
@@ -514,7 +438,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_41
+    - name: Diode_SpriteSheet_29
       rect:
         serializedVersion: 2
         x: 32
@@ -524,7 +448,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_42
+    - name: Diode_SpriteSheet_30
       rect:
         serializedVersion: 2
         x: 64
@@ -534,7 +458,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_43
+    - name: Diode_SpriteSheet_31
       rect:
         serializedVersion: 2
         x: 96
@@ -544,7 +468,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_44
+    - name: Diode_SpriteSheet_32
       rect:
         serializedVersion: 2
         x: 128
@@ -554,7 +478,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_45
+    - name: Diode_SpriteSheet_33
       rect:
         serializedVersion: 2
         x: 160
@@ -564,7 +488,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_46
+    - name: Diode_SpriteSheet_34
       rect:
         serializedVersion: 2
         x: 192
@@ -574,7 +498,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_47
+    - name: Diode_SpriteSheet_35
       rect:
         serializedVersion: 2
         x: 224
@@ -584,7 +508,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_48
+    - name: Diode_SpriteSheet_36
       rect:
         serializedVersion: 2
         x: 0
@@ -594,7 +518,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_49
+    - name: Diode_SpriteSheet_37
       rect:
         serializedVersion: 2
         x: 32
@@ -604,7 +528,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_50
+    - name: Diode_SpriteSheet_38
       rect:
         serializedVersion: 2
         x: 64
@@ -614,7 +538,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_51
+    - name: Diode_SpriteSheet_39
       rect:
         serializedVersion: 2
         x: 96
@@ -624,7 +548,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_52
+    - name: Diode_SpriteSheet_40
       rect:
         serializedVersion: 2
         x: 128
@@ -634,7 +558,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_53
+    - name: Diode_SpriteSheet_41
       rect:
         serializedVersion: 2
         x: 160
@@ -644,20 +568,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_54
+    - name: Diode_SpriteSheet_42
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scavengers_SpriteSheet_55
-      rect:
-        serializedVersion: 2
-        x: 224
         y: 0
         width: 32
         height: 32
