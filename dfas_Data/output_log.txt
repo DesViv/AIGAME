@@ -1,0 +1,57 @@
+Initialize engine version: 5.2.3f1 (f3d16a1fa2dd)
+GfxDevice: creating device client; threaded=1
+d3d11: failed to create D3D11 device (0x887a0004)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [vm3dum.dll 8.15.1.32]
+    Renderer: VMware SVGA 3D
+    Vendor:   VMWare
+    VRAM:     368 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=0 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.105 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\justin\Desktop\AI2\AIGAME\dfas_Data\Managed\System.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 4f0 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.998700 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 3578.
+Total: 1.542400 ms (FindLiveObjects: 0.286300 ms CreateObjectMapping: 0.086300 ms MarkObjects: 1.152000 ms  DeleteObjects: 0.013700 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.374200 ms
+NullReferenceException: Object reference not set to an instance of an object
+  at Completed.GameManager.InitGame () [0x00000] in <filename unknown>:0 
+  at Completed.GameManager.OnLevelWasLoaded (Int32 index) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 320.
+Total: 1.148900 ms (FindLiveObjects: 0.037500 ms CreateObjectMapping: 0.034800 ms MarkObjects: 1.014700 ms  DeleteObjects: 0.057700 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.159800 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 1977.
+Total: 1.061800 ms (FindLiveObjects: 0.117300 ms CreateObjectMapping: 0.080400 ms MarkObjects: 0.823300 ms  DeleteObjects: 0.037200 ms)
+

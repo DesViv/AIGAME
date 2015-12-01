@@ -163,6 +163,7 @@ namespace Completed
             {
                 temp.setTurn(set);
                 temp.setSteps(5);
+                Debug.Log("Made it here");
                 if (!set)
                     temp.endPlayerTurn();
             }
