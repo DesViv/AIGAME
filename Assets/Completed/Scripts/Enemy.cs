@@ -22,7 +22,7 @@ namespace Completed
 
         //Moves a unit can make each turn
 
-        Vector3 currentPos;
+        public Vector3 currentPos;
 
         public bool myTurn;
         // All of these values are being set in the Enemy/Enemy2 prefabs

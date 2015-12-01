@@ -21,6 +21,7 @@ namespace Completed
         public List<GameObject> validMoves = new List<GameObject>();
         public List<Vector3> validPositions = new List<Vector3>();
         public List<GameObject> validAttack = new List<GameObject>();
+        public Vector3 currentPos;
 
 
         //public, virtual functions can be overridden by inheriting classes.
@@ -69,7 +70,7 @@ namespace Completed
                 int steps = xdif + ydif;
                 //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
                 StartCoroutine(SmoothMovement(des));
-
+                currentPos = des;
                 //Return true to say that Move was successful
                 Debug.Log(steps);
                 return steps;

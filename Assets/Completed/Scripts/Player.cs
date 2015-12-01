@@ -72,9 +72,9 @@ namespace Completed
             {
                 //Player 1 always goes first
                 this.myTurn = true;
-                GM.player0.Add(this);
+                GM.redPlayer.Add(this);
             }
-            else GM.player1.Add(this);
+            else GM.bluePlayer.Add(this);
 
             //Call the Start function of the MovingObject base class.
             base.Start();

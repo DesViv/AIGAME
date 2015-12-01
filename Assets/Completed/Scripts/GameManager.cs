@@ -31,10 +31,15 @@ namespace Completed
 
         //Every time an Enemy is added to the game board, it will add itself to one of these lists based on the team it's on by calling AddEnemyToList in start() of Enemy.cs
         public List<Enemy> blueComp;
-        public List<Enemy> redComp;  
+        public List<Enemy> redComp;
+
+        public AIBase blueAI;
+        public AIBase redAI;
         //Awake is always called before any Start functions
         void Awake()
         {
+            blueAI = new AISimple();
+            redAI = new AISimple();
             //Check if instance already exists
             if (instance == null)
 
@@ -100,7 +105,14 @@ namespace Completed
                     setEnemyTurn(redComp, true);                    
                     setTurn(bluePlayer, false);
                     curTeam = 1;
-                    StartCoroutine(MoveEnemies(redComp));
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Player e in bluePlayer)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    redAI.init(redComp, other);
+                    redAI.onTurn();
+                    StartCoroutine(MoveEnemies(redAI));
                 }
                 else
                 {
@@ -115,14 +127,28 @@ namespace Completed
                 {
                     setEnemyTurn(redComp, true);
                     setEnemyTurn(blueComp, false);
-                    StartCoroutine(MoveEnemies(redComp));
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Player e in bluePlayer)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    redAI.init(redComp, other);
+                    redAI.onTurn();
+                    StartCoroutine(MoveEnemies(redAI));
                     curTeam = 1;
                 }
                 else
                 {
                     setEnemyTurn(blueComp, true);
                     setEnemyTurn(redComp, false);
-                    StartCoroutine(MoveEnemies(blueComp));
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Player e in redPlayer)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    blueAI.init(blueComp, other);
+                    blueAI.onTurn();
+                    StartCoroutine(MoveEnemies(blueAI));
                     curTeam = 0;
                 }
             }
@@ -307,25 +333,26 @@ namespace Completed
 
         //Coroutine to move enemies in sequence.
         //Currently this is being called in endturn() to move our enemies
-       IEnumerator MoveEnemies(List<Enemy> enemies)
+       IEnumerator MoveEnemies(AIBase ai)
         {
             Debug.Log("We made it");
             //While enemiesMoving is true player is unable to move.
             //Wait for turnDelay seconds, defaults to .1 (100 ms).
             yield return new WaitForSeconds(turnDelay);               
                 //If there are no enemies spawned (IE in first level):
-                if (enemies.Count == 0)
+                if (ai.Count == 0)
                 {
                     //Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
                     yield return new WaitForSeconds(turnDelay);
                 }
 
                 //Loop through List of Enemy objects.
-                for (int i = 0; i < enemies.Count; i++)
+                foreach(AIAction act in ai.acts)
                 {
-                    //Call the MoveEnemy function of Enemy at index i in the enemies List.
-                    //Wait for Enemy's moveTime before moving next Enemy,
-                    yield return new WaitForSeconds(enemies[i].moveTime);
+                Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
+                    if(act.action==AIAction.Actions.Move)
+                        act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
+                    yield return new WaitForSeconds(act.obj.moveTime);
                 }
             endTurn();           
            
