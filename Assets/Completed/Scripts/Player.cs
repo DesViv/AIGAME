@@ -37,12 +37,14 @@ namespace Completed
 
         private int currentStepsLeft;
 
+        private Text nameText;
         private Text descriptionText;
         private Text stepsLeftText;
         private Button endAction;
         private Text attackText;
         private Text rangeText;
         private Text healthText;
+        private Image unitPortrait;
 
         private bool movingPhase;
         private bool attackPhase;
@@ -60,6 +62,7 @@ namespace Completed
             //Get a component reference to the Player's animator component
             animator = GetComponent<Animator>();
 
+            nameText = GameObject.Find("Name").GetComponent<Text>();
             stepsLeftText = GameObject.Find("StepsText").GetComponent<Text>();
             descriptionText = GameObject.Find("Description").GetComponent<Text>();
             attackText = GameObject.Find("Attack").GetComponent<Text>();
@@ -67,6 +70,8 @@ namespace Completed
             healthText = GameObject.Find("Health").GetComponent<Text>();
             endAction = GameObject.Find("EndTurn").GetComponent<Button>();
             damageText = GameObject.Find("Damage").GetComponent<Text>();
+            unitPortrait = GameObject.Find("UnitPortrait").GetComponent<Image>();
+            unitPortrait.enabled = false;
 
             GM = GameObject.FindObjectOfType<GameManager>();
 
@@ -434,26 +439,35 @@ namespace Completed
             healthText.text = health.ToString();
             if (myTurn)
                 stepsLeftText.text = "Moves remaining: " + currentStepsLeft + "/" + stepsLeft;
+            unitPortrait.enabled = true;
             switch (unitType)
             {
                 case UnitType.Blocker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Blocker";
                     descriptionText.text = "A defensive unit with increased HP.\n- 1.5x vs Rushers\n- 0.5x vs Breakers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_blocker");
                 break;
                 case UnitType.Breaker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Breaker";
                     descriptionText.text = "An assault unit with better damage.\n- 1.5x vs Blockers\n- 0.5x vs Rushers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_breaker");
                     break;
                 case UnitType.Rusher:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Rusher";
                     descriptionText.text = "A flanking unit with higher range.\n- 1.5x vs Breakers\n- 0.5x vs Blockers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_rusher");
                     break;
             }
         }
         void OnMouseExit()
         {
+            nameText.text = "";
             attackText.text = "";
             rangeText.text = "";
             healthText.text = "";
             stepsLeftText.text = "";
             descriptionText.text = "";
+            unitPortrait.enabled = false;
         }
     }
 }
