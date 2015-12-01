@@ -16,7 +16,6 @@ namespace Completed
 		private Animator animator;							//Variable of type Animator to store a reference to the enemy's Animator component.
 		private Transform target;							//Transform to attempt to move toward each turn.
 		private bool skipMove;                              //Boolean to determine whether or not enemy should skip a turn or move this turn.
-        public int team;
         private Text attackText;
         private Text healthText;
         
@@ -25,10 +24,8 @@ namespace Completed
         Vector3 currentPos;
 
         public bool myTurn;
-        // All of these values are being set in the Enemy/Enemy2 prefabs
-        public int health;
-        public int attackPower;
-        public int stepsLeft;
+
+	
         public int moveRange;
         //Start overrides the virtual Start function of the base class.
         protected override void Start ()

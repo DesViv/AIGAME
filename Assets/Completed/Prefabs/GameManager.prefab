@@ -74,7 +74,9 @@ MonoBehaviour:
   wallTiles:
   - {fileID: 110520, guid: 2570048905bd94d6f8a99d13b80daf90, type: 2}
   playerTiles:
-  - {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+  - {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
+  - {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
+  - {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
   player2Tiles:
   - {fileID: 146652, guid: 774e32e424dcb8342966e327a515dc3f, type: 2}
   outerWallTiles:
@@ -82,7 +84,9 @@ MonoBehaviour:
   blockTiles:
   - {fileID: 138320, guid: efc757259c3ada34abf3be743c5aea73, type: 2}
   enemyTiles:
-  - {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+  - {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
+  - {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
+  - {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
   enemy2Tiles:
   - {fileID: 161064, guid: 089a2f2c322ea40f9afdfaba0550c6d3, type: 2}
 --- !u!1001 &100100000
@@ -102,7 +106,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: floorTiles.Array.size
@@ -110,7 +114,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: enemy2Tiles.Array.size
@@ -139,11 +143,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+      objectReference: {fileID: 146652, guid: f58e50bdc525a6946b3f220144fe9d8d, type: 2}
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+      objectReference: {fileID: 146652, guid: 0222ce3bb496c684f85b50fc5f24bb72, type: 2}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: GameManager
@@ -151,15 +155,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[0]
       value: 
-      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+      objectReference: {fileID: 146652, guid: 4c4e40b73953a454a9ef40c51558d95b, type: 2}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[1]
       value: 
-      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+      objectReference: {fileID: 146652, guid: de2edb0118e5a0f43a67625a8666bf46, type: 2}
     - target: {fileID: 0}
       propertyPath: playerTiles.Array.data[2]
       value: 
-      objectReference: {fileID: 146652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+      objectReference: {fileID: 146652, guid: d59b4cdd744131e4bb2e22bfba93fa63, type: 2}
     - target: {fileID: 0}
       propertyPath: player2Tiles.Array.data[0]
       value: 
@@ -175,7 +179,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemyTiles.Array.data[2]
       value: 
-      objectReference: {fileID: 195068, guid: ebfba08a213d34c46ba2b1947aeaea83, type: 2}
+      objectReference: {fileID: 146652, guid: 973f004b2be036544a39dd99fa4cc820, type: 2}
     - target: {fileID: 0}
       propertyPath: enemy2Tiles.Array.data[0]
       value: 
