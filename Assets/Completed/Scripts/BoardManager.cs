@@ -135,6 +135,14 @@ namespace Completed
 			}
 		}
 
+        // place the given GameObject at the given location
+        void PlaceObject(GameObject gameObject, int xPos, int yPos, bool isPlayer)
+        {
+            Vector3 gamePosition = new Vector3(xPos, yPos);
+            gameObject.tag = (isPlayer ? "Player" : "Enemy");
+            Instantiate(gameObject, gamePosition, Quaternion.identity);
+        }
+
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
@@ -149,6 +157,10 @@ namespace Completed
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = 3;
+
+            PlaceObject(bluePlayerTiles[0], 0, 0, true);
+            PlaceObject(bluePlayerTiles[1], 1, 0, true);
+            PlaceObject(bluePlayerTiles[2], 2, 0, true);
 
             //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
             if (mode == 0)
