@@ -336,7 +336,7 @@ namespace Completed
                     if (toHitEnemy.health <= 0)
                     {
                         Destroy(target);
-                        //GM.removePlayer(toHitEnemy, toHitEnemy.team);
+                        GM.removeEnemy(toHitEnemy, toHitEnemy.team);
                     }
                     resetValidTiles();
                     endPlayerTurn();
