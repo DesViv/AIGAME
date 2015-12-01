@@ -44,7 +44,9 @@ namespace Completed
 
         public enum UnitType {Blocker, Breaker, Rusher};
         public UnitType unitType;
-        protected Image unitPortrait;
+		protected Image unitPortrait;
+		
+		public GameManager GM;
 
         //public, virtual functions can be overridden by inheriting classes.
         public virtual void Start()
@@ -66,7 +68,9 @@ namespace Completed
             unitPortrait.enabled = false;
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
-            inverseMoveTime = 1f / moveTime;
+			inverseMoveTime = 1f / moveTime;
+
+			GM = GameObject.FindObjectOfType<GameManager>();
         }
 
         public virtual void showValidAttack()
@@ -201,6 +205,13 @@ namespace Completed
 
         void OnMouseOver()
         {
+			// quit if confirmation dialogue is visible
+			if (GM.ui_confirm.activeSelf)
+			{
+				OnMouseExit();
+				return;
+			}
+
             attackText.text = attackPower.ToString();
             rangeText.text = stepsLeft.ToString();
             healthText.text = health.ToString();

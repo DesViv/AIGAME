@@ -25,33 +25,19 @@ namespace Completed
         private Animator animator;                  //Used to store a reference to the Player's animator component.
         private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 
-
-        // All of these values are being set in the Player prefab
-
-        //
-
-
-
         private Button endAction;
-
 
         private bool movingPhase;
         private bool attackPhase;
 
-        public GameManager GM;
-
-
-
-
         //Start overrides the Start function of MovingObject
         public override void Start()
-        {
+		{
+			//Call the Start function of the MovingObject base class.
+			base.Start();
+
             //Get a component reference to the Player's animator component
             animator = GetComponent<Animator>();
-
-           
-
-            GM = GameObject.FindObjectOfType<GameManager>();
 
             myTurn = false;
             movingPhase = true;
@@ -66,8 +52,6 @@ namespace Completed
             }
             else GM.redPlayer.Add(this);
 
-            //Call the Start function of the MovingObject base class.
-            base.Start();
         }
 
 
@@ -79,6 +63,8 @@ namespace Completed
 
         void OnMouseDown()
         {
+			// quit if confirmation dialogue is visible
+			if (GM.ui_confirm.activeSelf) return;
 
             if (myTurn)//   &&  (GM.curPlayer==null|| GM.curPlayer == this))
             {

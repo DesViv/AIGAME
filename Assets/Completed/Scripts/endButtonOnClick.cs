@@ -13,8 +13,18 @@ public class endButtonOnClick : MonoBehaviour {
 
     public void endturn()
     {
-        gm.endTurn();
+		gm.endTurnConfirm();
     }
+
+	public void confirmYes()
+	{
+		gm.confirmYes();
+	}
+
+	public void confirmNo()
+	{
+		gm.confirmNo();
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +33,8 @@ public class endButtonOnClick : MonoBehaviour {
 
     public void menu()
     {
-        Application.LoadLevel("Menu");
+		gm.endGameConfirm();
+        //Application.LoadLevel("Menu");
     }
     public void exit()
     {

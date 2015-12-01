@@ -15,6 +15,10 @@ namespace Completed
         [HideInInspector]
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
+		public GameObject ui_confirm;
+		public Text ui_confirmText;
+		public enum MenuStates{END_TURN, MAIN_MENU};
+		private MenuStates currState;
 
         private Text levelText;                                 //Text to display current level number.
         private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
@@ -35,11 +39,59 @@ namespace Completed
 
         public AIBase blueAI;
         public AIBase redAI;
+
+		void Start()
+		{
+			ui_confirm = GameObject.Find("Confirmation");
+			ui_confirmText = GameObject.Find("ConfirmPromptText").GetComponent<Text>();
+			ui_confirm.SetActive(false);
+		}
+
         //Awake is always called before any Start functions
         void Awake()
         {
 
         }
+
+		public void confirmYes()
+		{
+			switch (currState)
+			{
+				case MenuStates.END_TURN:
+					endTurn();
+				break;
+				case MenuStates.MAIN_MENU:
+					Application.LoadLevel("Menu");
+				break;
+			}
+			ui_confirm.SetActive(false);
+		}
+
+		public void confirmNo()
+		{
+			ui_confirm.SetActive(false);
+		}
+
+		// called when clicking the End Turn button; show the confirmation window
+		public void endTurnConfirm()
+		{
+			ui_confirmText.text = "Are you sure you want to end your turn?";
+			currState = MenuStates.END_TURN;
+			if (!ui_confirm.activeSelf)
+			{
+				ui_confirm.SetActive(true);
+			}
+		}
+
+		public void endGameConfirm()
+		{
+			ui_confirmText.text = "Are you sure you want to quit the game?";
+			currState = MenuStates.MAIN_MENU;
+			if (!ui_confirm.activeSelf)
+			{
+				ui_confirm.SetActive(true);
+			}
+		}
 
         /*
          * Goes through a list of enemies/players, sets their turn to true/false and resets their stepsleft to 5
