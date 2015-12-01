@@ -6,41 +6,46 @@ using System.Text;
 using Microsoft.CSharp;
 using System;
 using System.Reflection;
+using Completed;
+using System.Collections.Generic;
 
-public class ListAI : MonoBehaviour {
+public class ListAI  {
 
-	// Use this for initialization
-	void Start () {
-        CSharpCodeProvider provider = new CSharpCodeProvider();
-        CompilerParameters parameters = new CompilerParameters();
-        foreach (string file in Directory.GetFiles("AI"))
+    // Use this for initialization
+    public static Boolean init;
+    public static Dictionary<string, AIBase> AIPrograms;
+	public static void initAI() {
+        if (!init)
         {
-            parameters = new CompilerParameters();
-            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            AIPrograms = new Dictionary<string, AIBase>();
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CompilerParameters parameters = new CompilerParameters();
+            foreach (string file in Directory.GetFiles("AI"))
             {
-                parameters.ReferencedAssemblies.Add(asm.Location);
-            }
-            Debug.Log(file);
-            StreamReader theReader = new StreamReader(file, Encoding.Default);
-            string code = theReader.ReadToEnd();
-            CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
-            if (results.Errors.Count > 0)
-            {
-                foreach (CompilerError CompErr in results.Errors)
+                parameters = new CompilerParameters();
+                foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    Debug.Log("Line number " + CompErr.Line +
-                        ", Error Number: " + CompErr.ErrorNumber +
-                        ", '" + CompErr.ErrorText + ";");
+                    parameters.ReferencedAssemblies.Add(asm.Location);
                 }
+                Debug.Log(Path.GetFileNameWithoutExtension(file));
+                StreamReader theReader = new StreamReader(file, Encoding.Default);
+                string code = theReader.ReadToEnd();
+                CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
+                if (results.Errors.Count > 0)
+                {
+                    foreach (CompilerError CompErr in results.Errors)
+                    {
+                        Debug.Log("Line number " + CompErr.Line +
+                            ", Error Number: " + CompErr.ErrorNumber +
+                            ", '" + CompErr.ErrorText + ";");
+                    }
+                }
+                Assembly assembly = results.CompiledAssembly;
+                Type program = assembly.GetType(Path.GetFileNameWithoutExtension(file));
+                ConstructorInfo main = program.GetConstructor(new Type[0]);
+                AIBase ai = (AIBase)main.Invoke(new System.Object[0]);
+                AIPrograms.Add(Path.GetFileNameWithoutExtension(file), ai);
             }
-            Assembly assembly = results.CompiledAssembly;
-            Type program = assembly.GetType("AISimple");
-            MethodInfo main = program.GetMethod("AISimple");
         }
     }
-
-	// Update is called once per frame
-	void Update () {
-
-	}
 }
