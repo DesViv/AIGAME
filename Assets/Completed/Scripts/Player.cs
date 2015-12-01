@@ -35,10 +35,16 @@ namespace Completed
         public int stepsLeft;
         //
 
+        private int currentStepsLeft;
+
+        private Text nameText;
+        private Text descriptionText;
         private Text stepsLeftText;
         private Button endAction;
         private Text attackText;
+        private Text rangeText;
         private Text healthText;
+        private Image unitPortrait;
 
         private bool movingPhase;
         private bool attackPhase;
@@ -56,17 +62,23 @@ namespace Completed
             //Get a component reference to the Player's animator component
             animator = GetComponent<Animator>();
 
+            nameText = GameObject.Find("Name").GetComponent<Text>();
             stepsLeftText = GameObject.Find("StepsText").GetComponent<Text>();
+            descriptionText = GameObject.Find("Description").GetComponent<Text>();
             attackText = GameObject.Find("Attack").GetComponent<Text>();
+            rangeText = GameObject.Find("Range").GetComponent<Text>();
             healthText = GameObject.Find("Health").GetComponent<Text>();
             endAction = GameObject.Find("EndTurn").GetComponent<Button>();
             damageText = GameObject.Find("Damage").GetComponent<Text>();
+            unitPortrait = GameObject.Find("UnitPortrait").GetComponent<Image>();
+            unitPortrait.enabled = false;
 
             GM = GameObject.FindObjectOfType<GameManager>();
 
             myTurn = false;
             movingPhase = true;
             attackPhase = true;
+            currentStepsLeft = stepsLeft;
 
             if (team == 0)
             {
@@ -94,7 +106,7 @@ namespace Completed
             {
                 Debug.Log(this.GetType());
                 GM.setCurTeam(team);
-                if (stepsLeft > 0)
+                if (currentStepsLeft > 0)
                 {
                     //Move one tile at a time because there are pathing issues when moving multiple tiles at a time, and I don't want to spend the time fixing them.
                     showValidTiles(moveRange);
@@ -102,8 +114,8 @@ namespace Completed
                 }
                 if (!moveSelection)
                 {
-                    Debug.Log("move phase" + stepsLeft);
-                    if (stepsLeft > 0)
+                    Debug.Log("move phase" + currentStepsLeft);
+                    if (currentStepsLeft > 0)
                     {
 
                         canMove = true;
@@ -121,7 +133,7 @@ namespace Completed
             myTurn = false;
             Debug.Log(myTurn + " this should be false");
             resetValidTiles();
-            stepsLeft = 5;
+            currentStepsLeft = stepsLeft;
         }
 
         public void setTurn(bool turn)
@@ -130,7 +142,7 @@ namespace Completed
         }
         public void setSteps(int steps)
         {
-            stepsLeft = steps;
+            currentStepsLeft = stepsLeft = steps;
         }
 
         public override void showValidTiles(int stepsLeft)
@@ -367,8 +379,8 @@ namespace Completed
             int stepsTaken = Move(xDir, yDir, validPositions);
             if (stepsTaken > 0)
             {
-                stepsLeft -= stepsTaken;
-                stepsLeftText.text = "Moves remaining: " + stepsLeft;
+                currentStepsLeft -= stepsTaken;
+                stepsLeftText.text = "Moves remaining: " + currentStepsLeft;
             }
 
             resetValidTiles();
@@ -422,16 +434,40 @@ namespace Completed
 
         void OnMouseOver()
         {
-            attackText.text = "AP: " + attackPower;
-            healthText.text = "HP: " + health;
+            attackText.text = attackPower.ToString();
+            rangeText.text = stepsLeft.ToString();
+            healthText.text = health.ToString();
             if (myTurn)
-                stepsLeftText.text = "Moves remaining: " + stepsLeft;
+                stepsLeftText.text = "Moves remaining: " + currentStepsLeft + "/" + stepsLeft;
+            unitPortrait.enabled = true;
+            switch (unitType)
+            {
+                case UnitType.Blocker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Blocker";
+                    descriptionText.text = "A defensive unit with increased HP.\n- 1.5x vs Rushers\n- 0.5x vs Breakers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_blocker");
+                break;
+                case UnitType.Breaker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Breaker";
+                    descriptionText.text = "An assault unit with better damage.\n- 1.5x vs Blockers\n- 0.5x vs Rushers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_breaker");
+                    break;
+                case UnitType.Rusher:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Rusher";
+                    descriptionText.text = "A flanking unit with higher range.\n- 1.5x vs Breakers\n- 0.5x vs Blockers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_rusher");
+                    break;
+            }
         }
         void OnMouseExit()
         {
+            nameText.text = "";
             attackText.text = "";
+            rangeText.text = "";
             healthText.text = "";
             stepsLeftText.text = "";
+            descriptionText.text = "";
+            unitPortrait.enabled = false;
         }
     }
 }
