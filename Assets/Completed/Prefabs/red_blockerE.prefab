@@ -71,16 +71,25 @@ MonoBehaviour:
   validPositions: []
   validAttack: []
   currentPos: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   unitType: 0
   attackSound1: {fileID: 0}
   attackSound2: {fileID: 0}
   alive: 0
   team: 1
   myTurn: 0
+=======
+  team: 1
+>>>>>>> eae97491f8cea5c4547bbe8584a03a0290a29eba
   health: 15
   attackPower: 4
-  stepsLeft: 5
   moveRange: 1
+  stepsLeft: 5
+  myTurn: 0
+  unitType: 0
+  attackSound1: {fileID: 0}
+  attackSound2: {fileID: 0}
+  alive: 0
 --- !u!212 &21246652
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -158,23 +158,22 @@ namespace Completed
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = 3;
 
-            PlaceObject(bluePlayerTiles[0], 0, 0, true);
-            PlaceObject(bluePlayerTiles[1], 1, 0, true);
-            PlaceObject(bluePlayerTiles[2], 2, 0, true);
-
             //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
             if (mode == 0)
             {
+                Debug.Log("mode 0");
                 LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
                 LayoutObjectAtRandom(redPlayerTiles, enemyCount, enemyCount, true);
             }
             else if(mode == 1)
             {
+                Debug.Log("mode 1");
                 LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
                 LayoutObjectAtRandom(bluePlayerTiles, enemyCount, enemyCount, true);
             }
             else
             {
+                Debug.Log("mode 2");
                 LayoutObjectAtRandom(blueCompTiles, enemyCount, enemyCount, false);
                 LayoutObjectAtRandom(redCompTiles, enemyCount, enemyCount, false);
             }

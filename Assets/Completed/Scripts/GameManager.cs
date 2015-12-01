@@ -38,39 +38,7 @@ namespace Completed
         //Awake is always called before any Start functions
         void Awake()
         {
-            blueAI = new AISimple();
-            redAI = new AISimple();
-            //Check if instance already exists
-            if (instance == null)
 
-                //if not, set instance to this
-                instance = this;
-
-            //If instance already exists and it's not this:
-            else if (instance != this)
-
-                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-                Destroy(gameObject);
-
-            //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
-            mode = BoardManager.mode;
-            //Assign enemies to a new List of Enemy objects.
-            if(mode == 1)
-            {
-                blueComp = new List<Enemy>();
-            }
-            if(mode == 2)
-            {
-                redComp = new List<Enemy>();
-            }
-            
-
-            //Get a component reference to the attached BoardManager script
-            boardScript = GetComponent<BoardManager>();
-
-            //Call the InitGame function to initialize the first level
-            InitGame();
         }
 
         /*
@@ -252,12 +220,42 @@ namespace Completed
             }
         }
 
+        
         //This is called each time a scene is loaded.
         void OnLevelWasLoaded(int index)
         {
-            //Add one to our level number.
-            level++;
-            //Call InitGame to initialize our level.
+            blueAI = new AISimple();
+            redAI = new AISimple();
+            //Check if instance already exists
+            if (instance == null)
+
+                //if not, set instance to this
+                instance = this;
+
+            //If instance already exists and it's not this:
+            else if (instance != this)
+
+                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+                Destroy(gameObject);
+
+            //Sets this to not be destroyed when reloading scene
+            DontDestroyOnLoad(gameObject);
+            mode = BoardManager.mode;
+            //Assign enemies to a new List of Enemy objects.
+            if (mode == 1)
+            {
+                blueComp = new List<Enemy>();
+            }
+            if (mode == 2)
+            {
+                redComp = new List<Enemy>();
+            }
+
+
+            //Get a component reference to the attached BoardManager script
+            boardScript = GetComponent<BoardManager>();
+
+            //Call the InitGame function to initialize the first level
             InitGame();
         }
 

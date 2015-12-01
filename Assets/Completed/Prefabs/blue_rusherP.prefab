@@ -71,6 +71,12 @@ MonoBehaviour:
   validPositions: []
   validAttack: []
   currentPos: {x: 0, y: 0, z: 0}
+  team: 0
+  health: 10
+  attackPower: 4
+  moveRange: 1
+  stepsLeft: 8
+  myTurn: 0
   unitType: 2
   restartLevelDelay: 1
   wallDamage: 1
@@ -82,16 +88,8 @@ MonoBehaviour:
   drinkSound1: {fileID: 0}
   drinkSound2: {fileID: 0}
   gameOverSound: {fileID: 0}
-  myTurn: 0
   myColor: {r: 1, g: 1, b: 1, a: 0}
-  team: 0
-  health: 10
-  attackPower: 4
-  moveRange: 1
-  stepsLeft: 8
   GM: {fileID: 0}
-  FloatingDamagePrefab: {fileID: 0}
-  damageText: {fileID: 0}
 --- !u!212 &21246652
 SpriteRenderer:
   m_ObjectHideFlags: 1
