@@ -24,8 +24,8 @@ namespace Completed
         public List<GameObject> validAttack = new List<GameObject>();
 
 		// ---------- UNIT INFORMATION ----------------------------------------
-		public enum UnitType{Rusher, Breaker, Blocker}
-		public UnitType unitType;	// 0 - rusher; 1 - breaker; 2 - blocker
+		public enum UnitType{Blocker, Breaker, Rusher}
+		public UnitType unitType;	// 0 - blocker; 1 - breaker; 2 - rusher
 
 		// All of these values are being set in the Player prefab
 		public int team;                          //player 1 or 2
@@ -36,6 +36,7 @@ namespace Completed
 		//
 		// ---------- UNIT INFORMATION END ------------------------------------
 
+		public int stepsLeftThisTurn;
 
         //Protected, virtual functions can be overridden by inheriting classes.
         protected virtual void Start()

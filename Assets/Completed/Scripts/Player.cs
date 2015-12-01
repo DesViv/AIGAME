@@ -12,14 +12,6 @@ namespace Completed
     {
 		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 		public int wallDamage = 1;					//How much damage a player does to a wall when chopping it.
-		public Text foodText;						//UI Text to display current player food total.
-		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
-		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
-		public AudioClip eatSound1;					//1 of 2 Audio clips to play when player collects a food object.
-		public AudioClip eatSound2;					//2 of 2 Audio clips to play when player collects a food object.
-		public AudioClip drinkSound1;				//1 of 2 Audio clips to play when player collects a soda object.
-		public AudioClip drinkSound2;				//2 of 2 Audio clips to play when player collects a soda object.
-		public AudioClip gameOverSound;				//Audio clip to play when player dies.
         
         public bool myTurn;
         public Color myColor;
@@ -67,6 +59,8 @@ namespace Completed
             }
             else GM.redPlayer.Add(this);
 
+			stepsLeftThisTurn = stepsLeft;
+
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
 		}
@@ -85,7 +79,7 @@ namespace Completed
             {
                 Debug.Log(this.GetType());
                 GM.setCurTeam(team);
-                if (stepsLeft > 0)
+				if (stepsLeftThisTurn > 0)
                 {
                     //Move one tile at a time because there are pathing issues when moving multiple tiles at a time, and I don't want to spend the time fixing them.
                     validMoves = showValidTiles(moveRange);
@@ -94,7 +88,7 @@ namespace Completed
                 if (!moveSelection)
                 {
                     Debug.Log("move phase" + stepsLeft);
-                    if (stepsLeft > 0)
+					if (stepsLeftThisTurn > 0)
                     {
 
                         canMove = true;
@@ -113,16 +107,18 @@ namespace Completed
             myTurn = false;
             Debug.Log(myTurn + " this should be false");
             resetValidTiles();
-            stepsLeft = 5;
+			stepsLeftThisTurn = moveRange;
         }
 
         public void setTurn(bool turn)
         {
             myTurn = turn;
         }
+
         public void setSteps(int steps)
         {
             stepsLeft = steps;
+			stepsLeftThisTurn = stepsLeft;
         }
 
         private List<GameObject> showValidTiles(int stepsLeft)
@@ -139,7 +135,7 @@ namespace Completed
                 int fY = (int)floors[i].transform.position.y;
                 int xdif = Mathf.Abs(fX - curX);
                 int ydif = Mathf.Abs(fY - curY);
-                if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
+				if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
                 {
 
                     Vector3 rayOrigin = new Vector3(10, 10, -100);
@@ -353,8 +349,8 @@ namespace Completed
             int stepsTaken= Move(xDir, yDir, validPositions);
             if (stepsTaken > 0)
             {
-                stepsLeft -= stepsTaken;
-                stepsLeftText.text = "Moves remaining: " + stepsLeft;
+				stepsLeftThisTurn -= stepsTaken;
+				stepsLeftText.text = "Moves remaining: " + stepsLeftThisTurn;
             }
 
             resetValidTiles();
@@ -411,7 +407,7 @@ namespace Completed
             attackText.text = "AP: " + attackPower;
             healthText.text = "HP: " + health;
             if(myTurn)
-            stepsLeftText.text = "Moves remaining: " + stepsLeft;
+            stepsLeftText.text = "Moves remaining: " + stepsLeftThisTurn;
         }
         void OnMouseExit()
         {
