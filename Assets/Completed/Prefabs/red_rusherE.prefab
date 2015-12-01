@@ -71,6 +71,7 @@ MonoBehaviour:
   validPositions: []
   validAttack: []
   currentPos: {x: 0, y: 0, z: 0}
+  unitType: 2
   attackSound1: {fileID: 0}
   attackSound2: {fileID: 0}
   alive: 0

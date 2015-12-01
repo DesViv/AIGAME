@@ -23,6 +23,8 @@ namespace Completed
         public List<GameObject> validAttack = new List<GameObject>();
         public Vector3 currentPos;
 
+        public enum UnitType {Blocker, Breaker, Rusher};
+        public UnitType unitType;
 
         //public, virtual functions can be overridden by inheriting classes.
         public virtual void Start()
