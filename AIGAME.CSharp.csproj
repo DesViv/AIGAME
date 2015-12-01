@@ -12,7 +12,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
@@ -74,11 +74,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AI\AISeekAndDestroy.cs" />
+    <Compile Include="Assets\AI\AISimple.cs" />
     <Compile Include="Assets\Completed\Scripts\AIAPI.cs" />
-    <Compile Include="Assets\Completed\Scripts\AISimple.cs" />
+    <Compile Include="Assets\Completed\Scripts\AIDropdown.cs" />
     <Compile Include="Assets\Completed\Scripts\BoardManager.cs" />
     <Compile Include="Assets\Completed\Scripts\Enemy.cs" />
     <Compile Include="Assets\Completed\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Completed\Scripts\ListAI.cs" />
     <Compile Include="Assets\Completed\Scripts\Loader.cs" />
     <Compile Include="Assets\Completed\Scripts\MovingObject.cs" />
     <Compile Include="Assets\Completed\Scripts\Player.cs" />
