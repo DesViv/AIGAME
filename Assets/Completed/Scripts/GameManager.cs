@@ -14,7 +14,7 @@ namespace Completed
         public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
         [HideInInspector]
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
-
+        
 
         private Text levelText;                                 //Text to display current level number.
         private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
@@ -38,12 +38,14 @@ namespace Completed
         //Awake is always called before any Start functions
         void Awake()
         {
-
+            ListAI.initAI();
+            blueAI = ListAI.AIPrograms["AISimple"];
+            redAI = ListAI.AIPrograms["AISimple"];
         }
 
         /*
          * Goes through a list of enemies/players, sets their turn to true/false and resets their stepsleft to 5
-         */ 
+         */
         public void endTurn()
         {
             Debug.Log("Current team: " + curTeam);
@@ -224,8 +226,6 @@ namespace Completed
         //This is called each time a scene is loaded.
         void OnLevelWasLoaded(int index)
         {
-            blueAI = new AISimple();
-            redAI = new AISimple();
             //Check if instance already exists
             if (instance == null)
 
