@@ -76,7 +76,6 @@ MonoBehaviour:
   attackSound2: {fileID: 0}
   alive: 0
   team: 1
-  currentPos: {x: 0, y: 0, z: 0}
   myTurn: 0
   health: 10
   attackPower: 6
