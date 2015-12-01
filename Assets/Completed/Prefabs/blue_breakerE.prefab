@@ -15,7 +15,7 @@ GameObject:
   - 222: {fileID: 22212718}
   m_Layer: 8
   m_Name: blue_breakerE
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,6 @@ MonoBehaviour:
   attackSound2: {fileID: 0}
   alive: 0
   team: 0
-  currentPos: {x: 0, y: 0, z: 0}
   myTurn: 0
   health: 10
   attackPower: 6
@@ -100,9 +99,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
