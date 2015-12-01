@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace Completed
 {
@@ -23,8 +24,27 @@ namespace Completed
         public List<GameObject> validAttack = new List<GameObject>();
         public Vector3 currentPos;
 
+        protected Text attackText;
+        protected Text rangeText;
+        protected Text healthText;
+        protected Text nameText;
+        protected Text descriptionText;
+        protected Text stepsLeftText;
+        protected Text damageText;
+
+
+        public int team;                          //player 1 or 2
+        public int health;
+        public int attackPower;
+        public int moveRange;
+        public int stepsLeft;
+        protected int currentStepsLeft;
+        public bool myTurn;
+
+
         public enum UnitType {Blocker, Breaker, Rusher};
         public UnitType unitType;
+        protected Image unitPortrait;
 
         //public, virtual functions can be overridden by inheriting classes.
         public virtual void Start()
@@ -34,6 +54,16 @@ namespace Completed
 
             //Get a component reference to this object's Rigidbody2D
             rb2D = GetComponent<Rigidbody>();
+
+            nameText = GameObject.Find("Name").GetComponent<Text>();
+            stepsLeftText = GameObject.Find("StepsText").GetComponent<Text>();
+            descriptionText = GameObject.Find("Description").GetComponent<Text>();
+            attackText = GameObject.Find("Attack").GetComponent<Text>();
+            rangeText = GameObject.Find("Range").GetComponent<Text>();
+            healthText = GameObject.Find("Health").GetComponent<Text>();
+            damageText = GameObject.Find("Damage").GetComponent<Text>();
+            unitPortrait = GameObject.Find("UnitPortrait").GetComponent<Image>();
+            unitPortrait.enabled = false;
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
@@ -169,6 +199,43 @@ namespace Completed
 				OnCantMove (hitComponent);*/
         }
 
+        void OnMouseOver()
+        {
+            attackText.text = attackPower.ToString();
+            rangeText.text = stepsLeft.ToString();
+            healthText.text = health.ToString();
+            if (myTurn)
+                stepsLeftText.text = "Moves remaining: " + currentStepsLeft + "/" + stepsLeft;
+            unitPortrait.enabled = true;
+            switch (unitType)
+            {
+                case UnitType.Blocker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Blocker";
+                    descriptionText.text = "A defensive unit with increased HP.\n- 1.5x vs Rushers\n- 0.5x vs Breakers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_blocker");
+                    break;
+                case UnitType.Breaker:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Breaker";
+                    descriptionText.text = "An assault unit with better damage.\n- 1.5x vs Blockers\n- 0.5x vs Rushers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_breaker");
+                    break;
+                case UnitType.Rusher:
+                    nameText.text = (team == 0 ? "Blue" : "Red") + " Rusher";
+                    descriptionText.text = "A flanking unit with higher range.\n- 1.5x vs Breakers\n- 0.5x vs Blockers";
+                    unitPortrait.sprite = (Sprite)Resources.Load<Sprite>((team == 0 ? "blue" : "red") + "_rusher");
+                    break;
+            }
+        }
+        void OnMouseExit()
+        {
+            nameText.text = "";
+            attackText.text = "";
+            rangeText.text = "";
+            healthText.text = "";
+            stepsLeftText.text = "";
+            descriptionText.text = "";
+            unitPortrait.enabled = false;
+        }
 
         //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
         //OnCantMove will be overriden by functions in the inheriting classes.

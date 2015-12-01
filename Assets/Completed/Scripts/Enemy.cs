@@ -16,17 +16,9 @@ namespace Completed
         private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
         private Transform target;                           //Transform to attempt to move toward each turn.
         private bool skipMove;                              //Boolean to determine whether or not enemy should skip a turn or move this turn.
-        public int team;
-        private Text attackText;
-        private Text healthText;
 
         //Moves a unit can make each turn
-        public bool myTurn;
         // All of these values are being set in the Enemy/Enemy2 prefabs
-        public int health;
-        public int attackPower;
-        public int stepsLeft;
-        public int moveRange;
         //Start overrides the virtual Start function of the base class.
         public override void Start()
         {
@@ -169,18 +161,5 @@ namespace Completed
             SoundManager.instance.RandomizeSfx(attackSound1, attackSound2);
         }
 
-        void OnMouseOver()
-        {
-            attackText.text = "AP: " + attackPower;
-            healthText.text = "HP: " + health;
-            //if (myTurn)
-            //stepsLeftText.text = "Moves remaining: " + stepsLeft;
-        }
-        void OnMouseExit()
-        {
-            attackText.text = "";
-            healthText.text = "";
-            //stepsLeftText.text = "";
-        }
     }
 }
