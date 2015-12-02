@@ -45,8 +45,6 @@ namespace Completed
         void Awake()
         {
             ListAI.initAI();
-            blueAI = ListAI.AIPrograms["AISeekAndDestroy"];
-            redAI = ListAI.AIPrograms["AISeekAndDestroy"];
         }
 
 		/*
