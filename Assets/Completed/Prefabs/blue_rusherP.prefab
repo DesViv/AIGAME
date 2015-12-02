@@ -78,6 +78,7 @@ MonoBehaviour:
   stepsLeft: 8
   myTurn: 0
   unitType: 2
+  GM: {fileID: 0}
   restartLevelDelay: 1
   wallDamage: 1
   foodText: {fileID: 0}
@@ -89,7 +90,6 @@ MonoBehaviour:
   drinkSound2: {fileID: 0}
   gameOverSound: {fileID: 0}
   myColor: {r: 1, g: 1, b: 1, a: 0}
-  GM: {fileID: 0}
 --- !u!212 &21246652
 SpriteRenderer:
   m_ObjectHideFlags: 1

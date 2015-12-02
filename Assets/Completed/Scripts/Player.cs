@@ -92,7 +92,7 @@ namespace Completed
             }
         }
 
-        public void endPlayerTurn()
+        public new void endPlayerTurn()
         {
             myTurn = false;
             Debug.Log(myTurn + " this should be false");
@@ -145,73 +145,9 @@ namespace Completed
             }
         }
 
-        public override void showValidAttack()
-        {
-            int curX = (int)transform.position.x;
-            int curY = (int)transform.position.y;
-            Vector3 cur = new Vector3(10, 10, -100);
-            List<Vector3> list = new List<Vector3>();
-            list.Add(new Vector3(curX, curY + 1, 0.1f));
-            list.Add(new Vector3(curX, curY - 1, 0.1f));
-            list.Add(new Vector3(curX - 1, curY, 0.1f));
-            list.Add(new Vector3(curX + 1, curY, 0.1f));
-            for (int i = 0; i < list.Count; i++)
-            {
-                RaycastHit hit;
-                Ray ray = new Ray(cur, (list[i] - cur).normalized);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    GameObject target = hit.collider.gameObject;
+ 
 
-                    if (target.tag == "Player" || target.tag == "Player2")
-                    {
-                        Player current = target.gameObject.GetComponent<Player>();
-                        if (this.team != current.team)
-                        {
-                            validAttack.Add(hit.collider.gameObject);
-                            SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
-                            sr.color = new Color(0f, 0f, 0f, 1f);
-                        }
-                    }
-                    Debug.Log(target.tag + " asdasd as");
-                    if (target.tag == "Enemy" || target.tag == "Enemy2")
-                    {
-                        Enemy current = target.gameObject.GetComponent<Enemy>();
-                        validAttack.Add(hit.collider.gameObject);
-                        SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
-                        sr.color = new Color(0f, 0f, 0f, 1f);
 
-                    }
-                }
-            }
-        }
-
-        private void resetValidTiles()
-        {
-            Debug.Log("enter reset");
-            Debug.Log(validMoves.Count);
-            for (int i = 0; i < validMoves.Count; i++)
-            {
-                SpriteRenderer renderer = validMoves[i].GetComponent<SpriteRenderer>();
-                if (renderer.tag == "Player2")
-                    renderer.color = myColor;
-                else
-                {
-                    //Debug.Log("color reset");
-                    renderer.color = new Color(1f, 1f, 1f, 1f);
-                }
-            }
-            for (int i = 0; i < validAttack.Count; i++)
-            {
-                SpriteRenderer renderer = validAttack[i].GetComponent<SpriteRenderer>();
-                if (renderer.tag == "Player2")
-                    renderer.color = Color.red;
-                else renderer.color = new Color(1f, 1f, 1f, 1f);
-            }
-            validMoves.Clear();
-            validPositions.Clear();
-            validAttack.Clear();
-        }
 
         private void Update()
         {
@@ -252,81 +188,8 @@ namespace Completed
             }
         }
 
-        private bool attack(int x, int y)
-        {
-            bool valid = false;
-            GameObject target = null;
-            Vector3 des = new Vector3(x, y, 0);
 
-            for (int i = 0; i < validAttack.Count; i++)
-            {
-                if (des == validAttack[i].transform.position)
-                {
-                    valid = true;
-                    target = validAttack[i];
-                    break;
-                }
-            }
 
-            if (valid)
-            {
-                Player toHit = target.gameObject.GetComponent<Player>();
-                if (toHit != null)
-                {
-
-                    toHit.health -= this.attackPower;
-                    damageText.text = "-" + this.attackPower;
-                    Vector2 pos = Camera.main.WorldToScreenPoint(target.transform.position);
-                    Vector2 end = new Vector2(pos.x + 5, pos.y + 20);
-                    //Floating damage text TODO: Dynamically add Text object so multiple damage texts can be shown at once
-                    StartCoroutine(floatingText(pos, end));
-                    if (toHit.health <= 0)
-                    {
-                        Destroy(target);
-                        GM.removePlayer(toHit, toHit.team);
-                    }
-                    resetValidTiles();
-                    endPlayerTurn();
-                }
-                else
-                {
-                    Enemy toHitEnemy = target.gameObject.GetComponent<Enemy>();
-                    toHitEnemy.health -= this.attackPower;
-                    damageText.text = "-" + this.attackPower;
-                    Vector2 pos = Camera.main.WorldToScreenPoint(target.transform.position);
-                    Vector2 end = new Vector2(pos.x + 5, pos.y + 20);
-                    //Floating damage text TODO: Dynamically add Text object so multiple damage texts can be shown at once
-                    StartCoroutine(floatingText(pos, end));
-                    if (toHitEnemy.health <= 0)
-                    {
-                        Destroy(target);
-                        GM.removeEnemy(toHitEnemy, toHitEnemy.team);
-                    }
-                    resetValidTiles();
-                    endPlayerTurn();
-                }
-            }
-
-            return valid;
-        }
-
-        public IEnumerator floatingText(Vector2 start, Vector2 end)
-        {
-            damageText.rectTransform.position = start;
-            damageText.enabled = true;
-            float duration = 1f;
-            float elapsedTime = 0;
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration; //0 means the animation just started, 1 means it finished
-                damageText.rectTransform.position = Vector2.Lerp(start, end, t);
-                elapsedTime += 2 * Time.deltaTime;
-                yield return null;
-            }
-
-            damageText.enabled = false;
-            yield return null;
-        }
 
 
         //Kill some time
