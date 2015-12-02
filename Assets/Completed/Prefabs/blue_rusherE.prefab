@@ -78,6 +78,7 @@ MonoBehaviour:
   stepsLeft: 8
   myTurn: 0
   unitType: 2
+  GM: {fileID: 0}
   attackSound1: {fileID: 0}
   attackSound2: {fileID: 0}
   alive: 0

@@ -163,7 +163,7 @@ GameObject:
   - 222: {fileID: 49587594}
   - 114: {fileID: 49587593}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Red Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Red Team
 --- !u!222 &49587594
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1305,7 +1305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: 'Select an AI '
 --- !u!222 &766026778
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1471,6 +1471,7 @@ GameObject:
   - 222: {fileID: 844172626}
   - 114: {fileID: 844172625}
   - 114: {fileID: 844172624}
+  - 114: {fileID: 844172627}
   m_Layer: 5
   m_Name: Dropdown (1)
   m_TagString: Untagged
@@ -1541,13 +1542,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1586,6 +1581,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 844172622}
+--- !u!114 &844172627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844172622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582633033d012a048beeeabc3faab11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &870530422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,7 +1657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Start
 --- !u!222 &870530425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1939,11 +1945,11 @@ MonoBehaviour:
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Select An AI Manager
 --- !u!222 &1252518339
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1961,7 +1967,7 @@ GameObject:
   - 222: {fileID: 1346198573}
   - 114: {fileID: 1346198572}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Blue Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2015,7 +2021,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Blue Team
+
+'
 --- !u!222 &1346198573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2137,13 +2145,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2358,7 +2360,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: 'Select an AI '
 --- !u!222 &1558162406
 CanvasRenderer:
   m_ObjectHideFlags: 0

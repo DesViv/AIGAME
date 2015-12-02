@@ -42,9 +42,7 @@ namespace Completed
 
 		void Start()
 		{
-			ui_confirm = GameObject.Find("Confirmation");
-			ui_confirmText = GameObject.Find("ConfirmPromptText").GetComponent<Text>();
-			ui_confirm.SetActive(false);
+
 		}
 
         //Awake is always called before any Start functions
@@ -304,7 +302,9 @@ namespace Completed
                 redComp = new List<Enemy>();
             }
 
-
+            ui_confirm = GameObject.Find("Confirmation");
+            ui_confirmText = GameObject.Find("ConfirmPromptText").GetComponent<Text>();
+            ui_confirm.SetActive(false);
             //Get a component reference to the attached BoardManager script
             boardScript = GetComponent<BoardManager>();
 
@@ -341,7 +341,7 @@ namespace Completed
             redPlayer.Clear();
 
             //Call the SetupScene function of the BoardManager script, pass it current level number.
-            boardScript.SetupScene(level);
+            boardScript.SetupScene(mode);
 
         }
 
