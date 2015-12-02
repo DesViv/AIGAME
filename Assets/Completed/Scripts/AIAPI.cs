@@ -31,6 +31,7 @@ namespace Completed
     }
 	public abstract class AIBase
 	{
+        public String description="";
         public int Count
         {
             set { }

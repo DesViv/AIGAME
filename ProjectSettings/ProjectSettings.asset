@@ -3,15 +3,18 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 6
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
+  targetGlesGraphics: -1
+  targetIOSGraphics: -1
   targetResolution: 0
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: AIGAME
+  cloudProjectId: 
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -24,6 +27,7 @@ PlayerSettings:
   m_ActiveColorSpace: 0
   m_MTRendering: 1
   m_MobileMTRendering: 0
+  m_UseDX11: 1
   m_Stereoscopic3D: 0
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
@@ -91,7 +95,6 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
-  virtualRealitySupported: 0
   productGUID: 189c3018b513e7c45abfb25f806cacfa
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
@@ -108,9 +111,6 @@ PlayerSettings:
   APKExpansionFiles: 0
   preloadShaders: 0
   StripUnusedMeshComponents: 0
-  VertexChannelCompressionMask:
-    serializedVersion: 2
-    m_Bits: 238
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 22
   uIPrerenderedIcon: 0
@@ -149,7 +149,6 @@ PlayerSettings:
   iOSDeviceRequirements: []
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
@@ -169,7 +168,6 @@ PlayerSettings:
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
-  m_BuildTargetGraphicsAPIs: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   wiiUTitleID: 0005000011000000
@@ -242,8 +240,6 @@ PlayerSettings:
   ps4SdkOverride: 
   ps4BGMPath: 
   ps4ShareFilePath: 
-  ps4ShareOverlayImagePath: 
-  ps4PrivacyGuardImagePath: 
   ps4NPtitleDatPath: 
   ps4RemotePlayKeyAssignment: -1
   ps4RemotePlayKeyMappingDir: 
@@ -252,8 +248,11 @@ PlayerSettings:
   ps4ApplicationParam2: 0
   ps4ApplicationParam3: 0
   ps4ApplicationParam4: 0
+<<<<<<< HEAD
+=======
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
+>>>>>>> origin/master
   ps4Passcode: 1O8YFOGKjxRrJBdT3hVOfoaMeAjSWfch
   ps4pnSessions: 1
   ps4pnPresence: 1
@@ -275,7 +274,6 @@ PlayerSettings:
   psp2NPTrophyPackPath: 
   psp2NPSupportGBMorGJP: 0
   psp2NPAgeRating: 12
-  psp2NPTitleDatPath: 
   psp2NPCommsID: 
   psp2NPCommunicationsID: 
   psp2NPCommsPassphrase: 
@@ -290,7 +288,6 @@ PlayerSettings:
   psp2PatchOriginalPackage: 
   psp2PackagePassword: oZYFYZ5B6kzMCk8R6BEuZMrF6cI6NX8D
   psp2KeystoneFile: 
-  psp2MemoryExpansionMode: 0
   psp2DRMType: 0
   psp2StorageType: 0
   psp2MediaCapacity: 0
@@ -406,7 +403,8 @@ PlayerSettings:
   blackberrySquareSplashScreen: {fileID: 0}
   tizenProductDescription: 
   tizenProductURL: 
-  tizenSigningProfileName: 
+  tizenCertificatePath: 
+  tizenCertificatePassword: 
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
   n3dsUseExtSaveData: 0
@@ -436,7 +434,6 @@ PlayerSettings:
   XboxOnePackagingOverridePath: 
   XboxOneAppManifestOverridePath: 
   XboxOnePackageEncryption: 0
-  XboxOnePackageUpdateGranularity: 2
   XboxOneDescription: 
   XboxOneIsContentPackage: 0
   XboxOneEnableGPUVariability: 0
@@ -485,8 +482,12 @@ PlayerSettings:
   WebGL::emscriptenArgs: 
   WebGL::template: APPLICATION:Default
   additionalIl2CppArgs::additionalIl2CppArgs: 
+<<<<<<< HEAD
+  firstStreamedLevelWithResources: 0
+=======
   firstStreamedSceneWithResources: 0
   cloudProjectId: 
   projectName: 
   organizationId: 
   cloudEnabled: 0
+>>>>>>> origin/master
