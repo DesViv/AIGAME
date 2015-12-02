@@ -73,6 +73,11 @@ namespace Completed
 			GM = GameObject.FindObjectOfType<GameManager>();
         }
 
+        public void resetStepsRemaining()
+        {
+            currentStepsLeft = stepsLeft;
+        }
+
 
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.

@@ -104,6 +104,7 @@ namespace Completed
         {
             myTurn = turn;
         }
+
         public void setSteps(int steps)
         {
             currentStepsLeft = stepsLeft = steps;

@@ -195,33 +195,31 @@ namespace Completed
         }
 
         /*
-         * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to 5
+         * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to stepsLeft
          */
-		public void setTurn(List<Player> stuff, bool set)
+        public void setTurn(List<Player> stuff, bool set)
 		{
 			foreach (Player temp in stuff)
 			{
 				temp.setTurn(set);
-				temp.setSteps(5);
+                temp.resetStepsRemaining();
 				Debug.Log("Made it here");
 				if (!set)
 					temp.endPlayerTurn();
 			}
 		}
-		
-		/*
-         * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to 5
+
+        /*
+         * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to stepsLeft
          * At the moment, Enemies will automatically end their turn once they run out of moves, we need to change that so it's up to 
          * whoever is implementing an AI algorithm TODO
          */
-		public void setEnemyTurn(List<Enemy> stuff, bool set)
+        public void setEnemyTurn(List<Enemy> stuff, bool set)
 		{
 			foreach (Enemy temp in stuff)
 			{
 				temp.myTurn = set;
-				temp.stepsLeft = 5;
-				//if (!set)
-				//temp.endPlayerTurn();
+                temp.resetStepsRemaining();
 			}
 		}
 		

@@ -170,7 +170,7 @@ namespace Completed
 			//LayoutObjectAtRandom (blockTiles, wallCount.minimum, wallCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = 1;
+			int enemyCount = 3;
 
             //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
             if (mode == 0)
