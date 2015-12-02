@@ -221,6 +221,8 @@ namespace Completed
                     if (target.tag == "Enemy" || target.tag == "Enemy2")
                     {
                         Enemy current = target.gameObject.GetComponent<Enemy>();
+                        if (current.team != this.team)
+                        {
                             validAttack.Add(hit.collider.gameObject);
                             SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
                             sr.color = new Color(0f, 0f, 0f, 1f);

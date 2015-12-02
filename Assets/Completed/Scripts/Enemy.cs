@@ -62,13 +62,6 @@ namespace Completed
             skipMove = true;
         }
 
-        private void resetValidTiles()
-        {
-            validMoves.Clear();
-            validPositions.Clear();
-            validAttack.Clear();
-        }
-
 
         //MoveEnemy is called by the GameManger each turn to tell each Enemy to try to move towards the player.
         public void MoveEnemy(int x, int y)

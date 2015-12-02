@@ -405,6 +405,8 @@ namespace Completed
                     if(act.action==AIAction.Actions.Move)
                         act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
                     if (act.action == AIAction.Actions.Attack) {
+                        Debug.Log("ATTACK ENEMY");
+
                         act.obj.attack((int)act.pos.x, (int)act.pos.y);
                     }
                     act.obj.resetValidTiles();
