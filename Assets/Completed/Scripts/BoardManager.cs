@@ -69,8 +69,8 @@ namespace Completed
 
 		public static void ClearAI()
 		{
-			AIRed = null;
-			AIBlue = null;
+			AIRed = "none";
+			AIBlue = "none";
 		}
 		
 		//Sets up the outer walls and floor (background) of the game board.

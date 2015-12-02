@@ -17,7 +17,6 @@ public class AISelectorControl : MonoBehaviour {
 	void OnLevelWasLoaded()
 	{
 		GameObject human = GameObject.Find("Human");
-		Debug.Log("mode = " + BoardManager.mode);
 		if (BoardManager.mode == 2)
 			human.SetActive(false);
 		else

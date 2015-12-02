@@ -16,7 +16,8 @@ namespace Completed
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
 		public GameObject ui_confirm;
-		public Text ui_confirmText;
+        private GameObject gameoverText;
+        public Text ui_confirmText;
 		public enum MenuStates{END_TURN, MAIN_MENU};
 		private MenuStates currState;
 		
@@ -194,33 +195,31 @@ namespace Completed
         }
 
         /*
-         * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to 5
+         * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to stepsLeft
          */
-		public void setTurn(List<Player> stuff, bool set)
+        public void setTurn(List<Player> stuff, bool set)
 		{
 			foreach (Player temp in stuff)
 			{
 				temp.setTurn(set);
-				temp.setSteps(5);
+                temp.resetStepsRemaining();
 				Debug.Log("Made it here");
 				if (!set)
 					temp.endPlayerTurn();
 			}
 		}
-		
-		/*
-         * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to 5
+
+        /*
+         * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to stepsLeft
          * At the moment, Enemies will automatically end their turn once they run out of moves, we need to change that so it's up to 
          * whoever is implementing an AI algorithm TODO
          */
-		public void setEnemyTurn(List<Enemy> stuff, bool set)
+        public void setEnemyTurn(List<Enemy> stuff, bool set)
 		{
 			foreach (Enemy temp in stuff)
 			{
 				temp.myTurn = set;
-				temp.stepsLeft = 5;
-				//if (!set)
-				//temp.endPlayerTurn();
+                temp.resetStepsRemaining();
 			}
 		}
 		
@@ -283,11 +282,16 @@ namespace Completed
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
-			
-			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
-			redAI = ListAI.AIPrograms[BoardManager.AIRed];
-			
-			Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
+
+            gameoverText = GameObject.Find("GameOver");
+            gameoverText.SetActive(false);
+
+            Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
+
+            if (BoardManager.AIBlue != "none")
+    			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
+            if (BoardManager.AIRed != "none")
+			    redAI = ListAI.AIPrograms[BoardManager.AIRed];
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			doingSetup = false;
@@ -327,10 +331,9 @@ namespace Completed
             if (team == 0)
             {
                 bluePlayer.Remove(dead);
-                Debug.Log(bluePlayer.Count + " player0");
-                if(bluePlayer.Count == 0)
+                if (bluePlayer.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
             }
             else
@@ -338,9 +341,8 @@ namespace Completed
                 redPlayer.Remove(dead);
                 if (redPlayer.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
-                Debug.Log(redPlayer.Count + " player1");
             }
         }
 
@@ -352,10 +354,9 @@ namespace Completed
             if (team == 0)
             {
                 blueComp.Remove(dead);
-                Debug.Log(redComp.Count + " enemy1");
-                if (redComp.Count == 0)
+                if (blueComp.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
             }
             else
@@ -363,11 +364,21 @@ namespace Completed
                 redComp.Remove(dead);
                 if (redComp.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
-                Debug.Log(redComp.Count + " enemy1");
             }
 		}
+
+        /*
+         *  Disables gameplay and shows the game over information.
+         */
+        void showEndState()
+        {
+            Debug.Log("End game!");
+            gameoverText.SetActive(true);
+            GameObject turnButton = GameObject.Find("EndTurn");
+            turnButton.SetActive(false);
+        }
 
 		/*
 		 *	Hides black sprite background visible between levels.
@@ -425,6 +436,8 @@ namespace Completed
                     act.obj.resetValidTiles();
                     yield return new WaitForSeconds(act.obj.moveTime);
                 }
+            Debug.Log(string.Format("End Turn"));
+
             endTurn();           
         }
     }
