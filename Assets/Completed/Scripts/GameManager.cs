@@ -149,7 +149,7 @@ namespace Completed
                     setEnemyTurn(redComp, true);
                     setEnemyTurn(blueComp, false);
                     List<MovingObject> other = new List<MovingObject>();
-                    foreach (Player e in bluePlayer)
+                    foreach (Enemy e in blueComp)
                     {
                         other.Add((MovingObject)e);
                     }
@@ -163,7 +163,7 @@ namespace Completed
                     setEnemyTurn(blueComp, true);
                     setEnemyTurn(redComp, false);
                     List<MovingObject> other = new List<MovingObject>();
-                    foreach (Player e in redPlayer)
+                    foreach (Enemy e in redComp)
                     {
                         other.Add((MovingObject)e);
                     }
@@ -401,9 +401,13 @@ namespace Completed
                 //Loop through List of Enemy objects.
                 foreach(AIAction act in ai.acts)
                 {
-                Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
+                    Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
                     if(act.action==AIAction.Actions.Move)
                         act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
+                    if (act.action == AIAction.Actions.Attack) {
+                        act.obj.attack((int)act.pos.x, (int)act.pos.y);
+                    }
+                    act.obj.resetValidTiles();
                     yield return new WaitForSeconds(act.obj.moveTime);
                 }
             endTurn();           

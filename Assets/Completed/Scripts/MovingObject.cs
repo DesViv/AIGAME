@@ -148,11 +148,10 @@ namespace Completed
 
             }
         }
-
-        public void showValidAttack()
+        public void showValidAttack(Vector2 pos)
         {
-            int curX = (int)transform.position.x;
-            int curY = (int)transform.position.y;
+            int curX = (int)pos.x;
+            int curY = (int)pos.y;
             Vector3 cur = new Vector3(10, 10, -100);
             List<Vector3> list = new List<Vector3>();
             list.Add(new Vector3(curX, curY + 1, 0.1f));
@@ -190,8 +189,52 @@ namespace Completed
             }
         }
 
+        public void showValidAttack()
+        {
+            int curX = (int)transform.position.x;
+            int curY = (int)transform.position.y;
+            Vector3 cur = new Vector3(10, 10, -100);
+            List<Vector3> list = new List<Vector3>();
+            list.Add(new Vector3(curX, curY + 1, 0.1f));
+            list.Add(new Vector3(curX, curY - 1, 0.1f));
+            list.Add(new Vector3(curX - 1, curY, 0.1f));
+            list.Add(new Vector3(curX + 1, curY, 0.1f));
+            for (int i = 0; i < list.Count; i++)
+            {
+                RaycastHit hit;
+                Ray ray = new Ray(cur, (list[i] - cur).normalized);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    GameObject target = hit.collider.gameObject;
+
+                    if (target.tag == "Player" || target.tag == "Player2")
+                    {
+                        Player current = target.gameObject.GetComponent<Player>();
+                        if (this.team != current.team)
+                        {
+                            validAttack.Add(hit.collider.gameObject);
+                            SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
+                            sr.color = new Color(0f, 0f, 0f, 1f);
+                        }
+                    }
+                    Debug.Log(target.tag + " asdasd as");
+                    if (target.tag == "Enemy" || target.tag == "Enemy2")
+                    {
+                        Enemy current = target.gameObject.GetComponent<Enemy>();
+                            validAttack.Add(hit.collider.gameObject);
+                            SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
+                            sr.color = new Color(0f, 0f, 0f, 1f);
+                        }
+
+                    }
+                }
+            }
+        }
+
         public bool attack(int x, int y)
         {
+            Debug.Log("Attack Now");
+
             bool valid = false;
             GameObject target = null;
             Vector3 des = new Vector3(x, y, 0);
@@ -228,6 +271,7 @@ namespace Completed
                 }
                 else
                 {
+                    Debug.Log("ATTACK ENEMY");
                     Enemy toHitEnemy = target.gameObject.GetComponent<Enemy>();
                     toHitEnemy.health -= this.attackPower;
                     damageText.text = "-" + this.attackPower;

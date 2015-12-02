@@ -4,7 +4,6 @@ using Completed;
 
 public class AISeekAndDestroy : AIBase
 {
-
     public override void onTurn()
     {
         base.onTurn();
