@@ -41,6 +41,7 @@ public class ListAI  {
                     }
                 }
                 Assembly assembly = results.CompiledAssembly;
+                Debug.Log("Assembly "+assembly);
                 Type program = assembly.GetType(Path.GetFileNameWithoutExtension(file));
                 ConstructorInfo main = program.GetConstructor(new Type[0]);
                 AIBase ai = (AIBase)main.Invoke(new System.Object[0]);
