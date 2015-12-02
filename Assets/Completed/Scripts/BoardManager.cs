@@ -69,8 +69,8 @@ namespace Completed
 
 		public static void ClearAI()
 		{
-			AIRed = null;
-			AIBlue = null;
+			AIRed = "none";
+			AIBlue = "none";
 		}
 		
 		//Sets up the outer walls and floor (background) of the game board.
@@ -170,7 +170,7 @@ namespace Completed
 			//LayoutObjectAtRandom (blockTiles, wallCount.minimum, wallCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = 3;
+			int enemyCount = 1;
 
             //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
             if (mode == 0)

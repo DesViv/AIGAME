@@ -16,7 +16,8 @@ namespace Completed
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
 		public GameObject ui_confirm;
-		public Text ui_confirmText;
+        private GameObject gameoverText;
+        public Text ui_confirmText;
 		public enum MenuStates{END_TURN, MAIN_MENU};
 		private MenuStates currState;
 		
@@ -283,11 +284,16 @@ namespace Completed
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
-			
-			Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
 
-			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
-			redAI = ListAI.AIPrograms[BoardManager.AIRed];
+            gameoverText = GameObject.Find("GameOver");
+            gameoverText.SetActive(false);
+
+            Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
+
+            if (BoardManager.AIBlue != "none")
+    			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
+            if (BoardManager.AIRed != "none")
+			    redAI = ListAI.AIPrograms[BoardManager.AIRed];
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			doingSetup = false;
@@ -327,10 +333,9 @@ namespace Completed
             if (team == 0)
             {
                 bluePlayer.Remove(dead);
-                Debug.Log(bluePlayer.Count + " player0");
-                if(bluePlayer.Count == 0)
+                if (bluePlayer.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
             }
             else
@@ -338,9 +343,8 @@ namespace Completed
                 redPlayer.Remove(dead);
                 if (redPlayer.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
-                Debug.Log(redPlayer.Count + " player1");
             }
         }
 
@@ -352,10 +356,9 @@ namespace Completed
             if (team == 0)
             {
                 blueComp.Remove(dead);
-                Debug.Log(redComp.Count + " enemy1");
-                if (redComp.Count == 0)
+                if (blueComp.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
             }
             else
@@ -363,11 +366,21 @@ namespace Completed
                 redComp.Remove(dead);
                 if (redComp.Count == 0)
                 {
-                    Application.LoadLevel("GameOver");
+                    showEndState();
                 }
-                Debug.Log(redComp.Count + " enemy1");
             }
 		}
+
+        /*
+         *  Disables gameplay and shows the game over information.
+         */
+        void showEndState()
+        {
+            Debug.Log("End game!");
+            gameoverText.SetActive(true);
+            GameObject turnButton = GameObject.Find("EndTurn");
+            turnButton.SetActive(false);
+        }
 
 		/*
 		 *	Hides black sprite background visible between levels.
