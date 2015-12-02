@@ -3,15 +3,15 @@ using System.Collections;
 
 namespace Completed
 {
-    using System.Collections.Generic;       //Allows us to use Lists.
-    using UnityEngine.UI;                   //Allows us to use UI.
+    using System.Collections.Generic;       // import Lists
+    using UnityEngine.UI;                   // import UI
 
     public class GameManager : MonoBehaviour
     {
-        public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
-        public float turnDelay = 0.1f;                          //Delay between each Player turn.
-        public int playerFoodPoints = 100;                      //Starting value for Player food points.
-        public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+        public float levelStartDelay = 2f;                      // Time to wait before starting level, in seconds.
+        public float turnDelay = 0.1f;                          // Delay between each Player turn.
+        public int playerFoodPoints = 100;                      // Starting value for Player food points.
+        public static GameManager instance = null;              // Static instance of GameManager which allows it to be accessed by any other script.
         [HideInInspector]
         public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
 
@@ -20,18 +20,17 @@ namespace Completed
 		public enum MenuStates{END_TURN, MAIN_MENU};
 		private MenuStates currState;
 
-        private Text levelText;                                 //Text to display current level number.
-        private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
-        private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-        private int level = 1;                                  //Current level number, expressed in game as "Day 1".
-        private bool doingSetup = true;                         //Boolean to check if we're setting up board, prevent Player from moving during setup.
+        private Text levelText;                                 // Text to display current level number.
+        private GameObject levelImage;                          // Image to block out level as levels are being set up, background for levelText.
+        private BoardManager boardScript;                       // Store a reference to our BoardManager which will set up the level.
+        private int level = 1;                                  // Current level number, expressed in game as "Day 1".
+        private bool doingSetup = true;                         // Boolean to check if we're setting up board, prevent Player from moving during setup.
 
         public int curTeam = 0;
 
         //Every time a Player is added to the game board, it will add itself to one of these lists based on the team it's on in start() of Player.cs
         public List<Player> bluePlayer;
         public List<Player> redPlayer;
-
 
         //Every time an Enemy is added to the game board, it will add itself to one of these lists based on the team it's on by calling AddEnemyToList in start() of Enemy.cs
         public List<Enemy> blueComp;
@@ -40,12 +39,9 @@ namespace Completed
         public AIBase blueAI;
         public AIBase redAI;
 
-		void Start()
-		{
-
-		}
-
-        //Awake is always called before any Start functions
+		/*
+		 *	Constructor. Always called before Start functions. Used to initialize.
+		 */
         void Awake()
         {
             ListAI.initAI();
@@ -53,6 +49,17 @@ namespace Completed
             redAI = ListAI.AIPrograms["AISimple"];
         }
 
+		/*
+		 *	Constructor. Not used.
+		 */
+		void Start()
+		{
+		}
+
+		/*
+		 *	Button callback; called when the "Yes" button in the confirmation menu is clicked.
+		 *	Based on the current menu state, either end the turn or exit to the main menu.
+		 */
 		public void confirmYes()
 		{
 			switch (currState)
@@ -61,48 +68,62 @@ namespace Completed
 					endTurn();
 				break;
 				case MenuStates.MAIN_MENU:
-					Application.LoadLevel("Menu");
+					Application.LoadLevel("Menu");		// go to the Menu scene
 				break;
 			}
-			ui_confirm.SetActive(false);
+			ui_confirm.SetActive(false);				// hide the confirmation menu
 		}
 
+		/*
+		 *	Button callback; called when the "Cancel" button in the confirmation menu is clicked.
+		 *	Simply hide the confirmation menu.
+		 */
 		public void confirmNo()
 		{
-			ui_confirm.SetActive(false);
+			ui_confirm.SetActive(false);				// hide the confirmation menu
 		}
 
-		// called when clicking the End Turn button; show the confirmation window
+		/*
+		 *	Button callback; called when the "End Turn" button is clicked.
+		 *	Show the confirmation menu.
+		 */
 		public void endTurnConfirm()
 		{
+			// first set the prompt
 			ui_confirmText.text = "Are you sure you want to end your turn?";
-			currState = MenuStates.END_TURN;
+			currState = MenuStates.END_TURN;			// remember that the confirmation menu is dealing with end turn
 			if (!ui_confirm.activeSelf)
 			{
-				ui_confirm.SetActive(true);
+				ui_confirm.SetActive(true);				// show the confirmation menu
 			}
 		}
-
+		
+		/*
+		 *	Button callback; called when the "Menu" button is clicked.
+		 *	Show the confirmation menu.
+		 */
 		public void endGameConfirm()
 		{
+			// first set the prompt
 			ui_confirmText.text = "Are you sure you want to quit the game?";
-			currState = MenuStates.MAIN_MENU;
+			currState = MenuStates.MAIN_MENU;			// remember that the confirmation menu is dealing with main menu
 			if (!ui_confirm.activeSelf)
 			{
-				ui_confirm.SetActive(true);
+				ui_confirm.SetActive(true);				// show the confirmation menu
 			}
 		}
 
         /*
-         * Goes through a list of enemies/players, sets their turn to true/false and resets their stepsleft to 5
+         * Ends the current player's turn.
+		 * Goes through both player's units and sets their turn to true/false and resets their steps left.
          */
         public void endTurn()
         {
             Debug.Log("Current team: " + curTeam);
             Debug.Log(mode);
-            if (mode == 0) // PlayervPlayer
+            if (mode == 0)		// Human vs Human
             {
-                Debug.Log(bluePlayer.Count + " IN WRONg MODE" + "    " + redComp.Count);
+                Debug.Log(bluePlayer.Count + " in wrong mode " + redComp.Count);
                 if (curTeam == 0)
                 {
                     setTurn(redPlayer, true);
@@ -116,9 +137,8 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if (mode == 1) //PlayervEnemy
+            else if (mode == 1)	// Human vs Computer
             {
-
                 Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
                 if (curTeam == 0)
                 {
@@ -141,7 +161,7 @@ namespace Completed
                     curTeam = 0;
                 }
             }
-            else if (mode == 2) //EvE
+            else if (mode == 2)	// Computer vs Computer
             { 
                 Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
                 if (curTeam == 0)
@@ -217,17 +237,14 @@ namespace Completed
             curTeam = team;
         }
 
-
         /*
-         * When a unit dies, remove them from the list
-         * then check for win condition
-         * Each player unit checks to see if it's dead when it gets attacked in Player.cs attack()
-         * If it dies, it will call this function so the gamemanager can remove it from the list and destroy it's corresponding GameObject
-         * 
+         * When a unit dies, remove them from the list, then check for win condition.
+         * Each player (human) unit checks to see if it's dead when it gets attacked in Player.cs attack()
+         * If it dies, it will call this function so the GameManager can remove it from the list and destroy its corresponding GameObject.
          */
         public void removePlayer(Player dead, int team)
         {
-            if(team == 0)
+            if (team == 0)
             {
                 bluePlayer.Remove(dead);
                 Debug.Log(bluePlayer.Count + " player0");
@@ -248,8 +265,7 @@ namespace Completed
         }
 
         /*
-         * When a unit dies, remove them from the list
-         * then check for win condition
+         * When a unit dies, remove them from the list, then check for a win condition.
          */
         public void removeEnemy(Enemy dead, int team)
         {
@@ -273,46 +289,45 @@ namespace Completed
             }
         }
 
-        
-        //This is called each time a scene is loaded.
+
+		/*
+		 *	Called when the scene is loaded; performs setup.
+		 */
         void OnLevelWasLoaded(int index)
         {
-            //Check if instance already exists
             if (instance == null)
-
-                //if not, set instance to this
                 instance = this;
-
-            //If instance already exists and it's not this:
             else if (instance != this)
+                Destroy(gameObject);		// destroy this if one already exists, to preserve singleton.
 
-                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-                Destroy(gameObject);
-
-            //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);	// don't destroy this when reloading scene
             mode = BoardManager.mode;
-            //Assign enemies to a new List of Enemy objects.
+
+            // assign enemies to a new List of Enemy objects.
             if (mode == 1)
             {
                 blueComp = new List<Enemy>();
             }
-            if (mode == 2)
+            else if (mode == 2)
             {
                 redComp = new List<Enemy>();
             }
 
+			// find and remember UI elements for use later
             ui_confirm = GameObject.Find("Confirmation");
             ui_confirmText = GameObject.Find("ConfirmPromptText").GetComponent<Text>();
             ui_confirm.SetActive(false);
-            //Get a component reference to the attached BoardManager script
+			
+            // get a component reference to the attached BoardManager script
             boardScript = GetComponent<BoardManager>();
 
-            //Call the InitGame function to initialize the first level
+            // initialize the rest of the game
             InitGame();
         }
 
-        //Initializes the game for each level.
+		/*
+		 *	Initializes the game.
+		 */
         void InitGame()
         {
             //While doingSetup is true the player can't move, prevent player from moving while title card is up.
@@ -324,36 +339,34 @@ namespace Completed
             //Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
             levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
-            //Set the text of levelText to the string "Day" and append the current level number.
-            //levelText.text = "Day " + level;
-
             //Set levelImage to active blocking player's view of the game board during setup.
-            //levelImage.SetActive(false);
             doingSetup = false;
 
             //Call the HideLevelImage function with a delay in seconds of levelStartDelay.
             Invoke("HideLevelImage", levelStartDelay);
 
-            //Clear any Player/Enemy objects in our List to prepare for next level.
+            // clear all previous units
             blueComp.Clear();
             redComp.Clear();
             bluePlayer.Clear();
             redPlayer.Clear();
 
-            //Call the SetupScene function of the BoardManager script, pass it current level number.
+            // Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(mode);
-
         }
 
         /*
-         * Used to set the mode
+         *	Used to set the mode.
+		 *	@param	i		The mode to use, an int.
          */ 
         public void setMode(int i)
         {
             mode = i;
         }
 
-        //Hides black image used between levels
+		/*
+		 *	Hides black sprite background visible between levels.
+		 */
         void HideLevelImage()
         {
             //Disable the levelImage gameObject.
@@ -363,29 +376,32 @@ namespace Completed
             doingSetup = false;
         }
 
-        //Update is called every frame.
+		/*
+		 *	Called every frame to update the game.
+		 */
         void Update()
         { 
             mode = BoardManager.mode;         
         }
 
         /*
-         * Enemies call this function in their start() method
+         *	When a player is a computer, this function is called in their start() method.
+		 *	Adds the unit to the appropriate list.
          */ 
         public void AddEnemyToList(Enemy script, int team)
         {
-            //Add Enemy to List enemies.
-            //enemies.Add(script);
             if (team == 0)
             {
                 blueComp.Add(script);
             }
-            else redComp.Add(script);
+            else
+				redComp.Add(script);
         }
 
-        //Coroutine to move enemies in sequence.
-        //Currently this is being called in endturn() to move our enemies
-       IEnumerator MoveEnemies(AIBase ai)
+		/*
+		 *	Helper to move computer-controlled units. Called in endTurn().
+		 */
+		IEnumerator MoveEnemies(AIBase ai)
         {
             Debug.Log("We made it");
             //While enemiesMoving is true player is unable to move.
@@ -407,7 +423,6 @@ namespace Completed
                     yield return new WaitForSeconds(act.obj.moveTime);
                 }
             endTurn();           
-           
         }
     }
 }
