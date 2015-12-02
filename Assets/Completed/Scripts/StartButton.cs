@@ -21,16 +21,21 @@ public class StartButton : MonoBehaviour {
 
     public void StartGamePvP(string name)
     {
+		BoardManager.ClearAI();
         BoardManager.mode = 0;
         Application.LoadLevel(name);
     }
+
     public void StartGamePvE(string name)
-    {
+	{
+		BoardManager.ClearAI();
         BoardManager.mode = 1;
         Application.LoadLevel(name);
     }
+
     public void StartGameEvE(string name)
-    {
+	{
+		BoardManager.ClearAI();
         BoardManager.mode = 2;
         Application.LoadLevel(name);
     }

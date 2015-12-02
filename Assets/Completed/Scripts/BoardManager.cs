@@ -25,7 +25,9 @@ namespace Completed
 			}
 		}
 
-       public static int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
+		public static int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
+		public static string AIBlue;
+		public static string AIRed;
 
         /// <summary>
         /// All of these values/arrays are being set/filled in the GameManager prefab, except for mode
@@ -64,7 +66,12 @@ namespace Completed
 				}
 			}
 		}
-		
+
+		public static void ClearAI()
+		{
+			AIRed = null;
+			AIBlue = null;
+		}
 		
 		//Sets up the outer walls and floor (background) of the game board.
 		void BoardSetup ()
