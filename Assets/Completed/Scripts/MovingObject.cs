@@ -38,6 +38,7 @@ namespace Completed
         public int attackPower;
         public int moveRange;
         public int stepsLeft;
+        public int totalSteps;
         protected int currentStepsLeft;
         public bool myTurn;
 
@@ -69,13 +70,14 @@ namespace Completed
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
 			inverseMoveTime = 1f / moveTime;
-
+            totalSteps = stepsLeft;
 			GM = GameObject.FindObjectOfType<GameManager>();
         }
 
         public void resetStepsRemaining()
         {
-            currentStepsLeft = stepsLeft;
+
+            currentStepsLeft = totalSteps;
         }
 
 
@@ -105,6 +107,7 @@ namespace Completed
                 int xdif = Mathf.Abs(desX - fX);
                 int ydif = Mathf.Abs(desY - fY);
                 int steps = xdif + ydif;
+                currentStepsLeft -= steps;
                 //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
                 StartCoroutine(SmoothMovement(des));
                 currentPos = des;
@@ -133,7 +136,7 @@ namespace Completed
                 int fY = (int)floors[i].transform.position.y;
                 int xdif = Mathf.Abs(fX - curX);
                 int ydif = Mathf.Abs(fY - curY);
-                if (xdif + ydif <= stepsLeft && xdif + ydif != 0)
+                if (xdif + ydif <= totalSteps && xdif + ydif != 0)
                 {
 
                     Vector3 rayOrigin = new Vector3(10, 10, -100);
@@ -409,7 +412,7 @@ namespace Completed
             rangeText.text = stepsLeft.ToString();
             healthText.text = health.ToString();
             if (myTurn)
-                stepsLeftText.text = "Moves remaining: " + currentStepsLeft + "/" + stepsLeft;
+                stepsLeftText.text = "Moves remaining: " + currentStepsLeft + "/" + totalSteps;
             unitPortrait.enabled = true;
             switch (unitType)
             {

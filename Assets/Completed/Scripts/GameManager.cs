@@ -436,6 +436,8 @@ namespace Completed
                     act.obj.resetValidTiles();
                     yield return new WaitForSeconds(act.obj.moveTime);
                 }
+            Debug.Log(string.Format("End Turn"));
+
             endTurn();           
         }
     }
