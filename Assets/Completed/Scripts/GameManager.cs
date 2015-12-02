@@ -284,10 +284,10 @@ namespace Completed
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 			
+			Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
+
 			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
 			redAI = ListAI.AIPrograms[BoardManager.AIRed];
-			
-			Debug.Log("AIs are " + BoardManager.AIBlue + " (blue), " + BoardManager.AIRed + " (red)");
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			doingSetup = false;

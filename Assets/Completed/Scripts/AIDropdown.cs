@@ -28,6 +28,9 @@ public class AIDropdown : MonoBehaviour {
 		dropdown.onValueChanged.AddListener(delegate {
 				onDropdownChanged(dropdown);
 		});
+
+		BoardManager.AIBlue = OptionsToAI[0];
+		BoardManager.AIRed = OptionsToAI[0];
 	}
 
 	void onDropdownChanged(Dropdown dropdown)
@@ -36,6 +39,7 @@ public class AIDropdown : MonoBehaviour {
 			BoardManager.AIBlue = OptionsToAI[dropdown.value];
 		else
 			BoardManager.AIRed = OptionsToAI[dropdown.value];
+		Debug.Log("AI selected: " + OptionsToAI[dropdown.value]);
 	}
 
 	// Update is called once per frame
