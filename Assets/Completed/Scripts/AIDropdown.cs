@@ -6,6 +6,9 @@ public class AIDropdown : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        ListAI.initAI();
+        var dropdown = this.GetComponentInParent<Dropdown>();
+        dropdown.options.Clear();
         foreach (string s in ListAI.AIPrograms.Keys)
         {
             dropdown.options.Add(new Dropdown.OptionData(s));
