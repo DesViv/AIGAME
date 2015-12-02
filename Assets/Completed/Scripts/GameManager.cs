@@ -3,18 +3,18 @@ using System.Collections;
 
 namespace Completed
 {
-	using System.Collections.Generic;       // import Lists
-	using UnityEngine.UI;                   // import UI
-	
-	public class GameManager : MonoBehaviour
-	{
-		public float levelStartDelay = 2f;                      // Time to wait before starting level, in seconds.
-		public float turnDelay = 0.1f;                          // Delay between each Player turn.
-		public int playerFoodPoints = 100;                      // Starting value for Player food points.
-		public static GameManager instance = null;              // Static instance of GameManager which allows it to be accessed by any other script.
-		[HideInInspector]
-		public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
-		
+    using System.Collections.Generic;       // import Lists
+    using UnityEngine.UI;                   // import UI
+
+    public class GameManager : MonoBehaviour
+    {
+        public float levelStartDelay = 2f;                      // Time to wait before starting level, in seconds.
+        public float turnDelay = 0.1f;                          // Delay between each Player turn.
+        public int playerFoodPoints = 100;                      // Starting value for Player food points.
+        public static GameManager instance = null;              // Static instance of GameManager which allows it to be accessed by any other script.
+        [HideInInspector]
+        public int mode; //0 = PlayervPlayer, 1 = PlayervEnemy, 2 = EnemyvEnemy
+
 		public GameObject ui_confirm;
 		public Text ui_confirmText;
 		public enum MenuStates{END_TURN, MAIN_MENU};
@@ -38,22 +38,24 @@ namespace Completed
 		
 		public AIBase blueAI;
 		public AIBase redAI;
-		
+
 		/*
 		 *	Constructor. Always called before Start functions. Used to initialize.
 		 */
-		void Awake()
-		{
-			ListAI.initAI();
-		}
-		
+        void Awake()
+        {
+            ListAI.initAI();
+            blueAI = ListAI.AIPrograms["AISeekAndDestroy"];
+            redAI = ListAI.AIPrograms["AISeekAndDestroy"];
+        }
+
 		/*
-		 *	Constructor.
+		 *	Constructor. Not used.
 		 */
 		void Start()
 		{
 		}
-		
+
 		/*
 		 *	Button callback; called when the "Yes" button in the confirmation menu is clicked.
 		 *	Based on the current menu state, either end the turn or exit to the main menu.
@@ -62,16 +64,16 @@ namespace Completed
 		{
 			switch (currState)
 			{
-			case MenuStates.END_TURN:
-				endTurn();
+				case MenuStates.END_TURN:
+					endTurn();
 				break;
-			case MenuStates.MAIN_MENU:
-				Application.LoadLevel("Menu");		// go to the Menu scene
+				case MenuStates.MAIN_MENU:
+					Application.LoadLevel("Menu");		// go to the Menu scene
 				break;
 			}
 			ui_confirm.SetActive(false);				// hide the confirmation menu
 		}
-		
+
 		/*
 		 *	Button callback; called when the "Cancel" button in the confirmation menu is clicked.
 		 *	Simply hide the confirmation menu.
@@ -80,7 +82,7 @@ namespace Completed
 		{
 			ui_confirm.SetActive(false);				// hide the confirmation menu
 		}
-		
+
 		/*
 		 *	Button callback; called when the "End Turn" button is clicked.
 		 *	Show the confirmation menu.
@@ -110,90 +112,90 @@ namespace Completed
 				ui_confirm.SetActive(true);				// show the confirmation menu
 			}
 		}
-		
-		/*
+
+        /*
          * Ends the current player's turn.
 		 * Goes through both player's units and sets their turn to true/false and resets their steps left.
          */
-		public void endTurn()
-		{
-			Debug.Log("Current team: " + curTeam);
-			Debug.Log(mode);
-			if (mode == 0)		// Human vs Human
-			{
-				Debug.Log(bluePlayer.Count + " in wrong mode " + redComp.Count);
-				if (curTeam == 0)
-				{
-					setTurn(redPlayer, true);
-					setTurn(bluePlayer, false);
-					curTeam = 1;
-				}
-				else
-				{
-					setTurn(bluePlayer, true);
-					setTurn(redPlayer, false);
-					curTeam = 0;
-				}
-			}
-			else if (mode == 1)	// Human vs Computer
-			{
-				Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
-				if (curTeam == 0)
-				{
-					setEnemyTurn(redComp, true);
-					setTurn(bluePlayer, false);
-					curTeam = 1;
-					List<MovingObject> other = new List<MovingObject>();
-					foreach (Player e in bluePlayer)
-					{
-						other.Add((MovingObject)e);
-					}
-					redAI.init(redComp, other);
-					redAI.onTurn();
-					StartCoroutine(MoveEnemies(redAI));
-				}
-				else
-				{
-					setTurn(bluePlayer, true);
-					setEnemyTurn(redComp, false);
-					curTeam = 0;
-				}
-			}
-			else if (mode == 2)	// Computer vs Computer
-			{ 
-				Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
-				if (curTeam == 0)
-				{
-					setEnemyTurn(redComp, true);
-					setEnemyTurn(blueComp, false);
-					List<MovingObject> other = new List<MovingObject>();
-					foreach (Player e in bluePlayer)
-					{
-						other.Add((MovingObject)e);
-					}
-					redAI.init(redComp, other);
-					redAI.onTurn();
-					StartCoroutine(MoveEnemies(redAI));
-					curTeam = 1;
-				}
-				else
-				{
-					setEnemyTurn(blueComp, true);
-					setEnemyTurn(redComp, false);
-					List<MovingObject> other = new List<MovingObject>();
-					foreach (Player e in redPlayer)
-					{
-						other.Add((MovingObject)e);
-					}
-					blueAI.init(blueComp, other);
-					blueAI.onTurn();
-					StartCoroutine(MoveEnemies(blueAI));
-					curTeam = 0;
-				}
-			}
-		}
-		
-		/*
+        public void endTurn()
+        {
+            Debug.Log("Current team: " + curTeam);
+            Debug.Log(mode);
+            if (mode == 0)		// Human vs Human
+            {
+                Debug.Log(bluePlayer.Count + " in wrong mode " + redComp.Count);
+                if (curTeam == 0)
+                {
+                    setTurn(redPlayer, true);
+                    setTurn(bluePlayer, false);
+                    curTeam = 1;
+                }
+                else
+                {
+                    setTurn(bluePlayer, true);
+                    setTurn(redPlayer, false);
+                    curTeam = 0;
+                }
+            }
+            else if (mode == 1)	// Human vs Computer
+            {
+                Debug.Log(bluePlayer.Count + " Count" + "    " + redComp.Count);
+                if (curTeam == 0)
+                {
+                    setEnemyTurn(redComp, true);
+                    setTurn(bluePlayer, false);
+                    curTeam = 1;
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Player e in bluePlayer)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    redAI.init(redComp, other);
+                    redAI.onTurn();
+                    StartCoroutine(MoveEnemies(redAI));
+                }
+                else
+                {
+                    setTurn(bluePlayer, true);
+                    setEnemyTurn(redComp, false);
+                    curTeam = 0;
+                }
+            }
+            else if (mode == 2)	// Computer vs Computer
+            { 
+                Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
+                if (curTeam == 0)
+                {
+                    setEnemyTurn(redComp, true);
+                    setEnemyTurn(blueComp, false);
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Enemy e in blueComp)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    redAI.init(redComp, other);
+                    redAI.onTurn();
+                    StartCoroutine(MoveEnemies(redAI));
+                    curTeam = 1;
+                }
+                else
+                {
+                    setEnemyTurn(blueComp, true);
+                    setEnemyTurn(redComp, false);
+                    List<MovingObject> other = new List<MovingObject>();
+                    foreach (Enemy e in redComp)
+                    {
+                        other.Add((MovingObject)e);
+                    }
+                    blueAI.init(blueComp, other);
+                    blueAI.onTurn();
+                    StartCoroutine(MoveEnemies(blueAI));
+                    curTeam = 0;
+                }
+            }
+        }
+
+        /*
          * Used by endTurn to set the boolean myTurn of players to true/false and reset their stepsLeft to 5
          */
 		public void setTurn(List<Player> stuff, bool set)
@@ -233,60 +235,7 @@ namespace Completed
 		public void setCurTeam(int team)
 		{
 			curTeam = team;
-		}
-		
-		/*
-         * When a unit dies, remove them from the list, then check for win condition.
-         * Each player (human) unit checks to see if it's dead when it gets attacked in Player.cs attack()
-         * If it dies, it will call this function so the GameManager can remove it from the list and destroy its corresponding GameObject.
-         */
-		public void removePlayer(Player dead, int team)
-		{
-			if (team == 0)
-			{
-				bluePlayer.Remove(dead);
-				Debug.Log(bluePlayer.Count + " player0");
-				if(bluePlayer.Count == 0)
-				{
-					Application.LoadLevel("GameOver");
-				}
-			}
-			else
-			{
-				redPlayer.Remove(dead);
-				if (redPlayer.Count == 0)
-				{
-					Application.LoadLevel("GameOver");
-				}
-				Debug.Log(redPlayer.Count + " player1");
-			}
-		}
-		
-		/*
-         * When a unit dies, remove them from the list, then check for a win condition.
-         */
-		public void removeEnemy(Enemy dead, int team)
-		{
-			if (team == 0)
-			{
-				blueComp.Remove(dead);
-				Debug.Log(redComp.Count + " enemy1");
-				if (redComp.Count == 0)
-				{
-					Application.LoadLevel("GameOver");
-				}
-			}
-			else
-			{
-				redComp.Remove(dead);
-				if (redComp.Count == 0)
-				{
-					Application.LoadLevel("GameOver");
-				}
-				Debug.Log(redComp.Count + " enemy1");
-			}
-		}
-		
+		}		
 		
 		/*
 		 *	Called when the scene is loaded; performs setup.
@@ -368,64 +317,117 @@ namespace Completed
 		}
 		
 		/*
-		 *	Hides black sprite background visible between levels.
-		 */
-		void HideLevelImage()
-		{
-			//Disable the levelImage gameObject.
-			levelImage.SetActive(false);
-			
-			//Set doingSetup to false allowing player to move again.
-			doingSetup = false;
-		}
-		
-		/*
 		 *	Called every frame to update the game.
 		 */
 		void Update()
 		{ 
 			mode = BoardManager.mode;         
 		}
-		
+
+        public void removePlayer(Player dead, int team)
+        {
+            if (team == 0)
+            {
+                bluePlayer.Remove(dead);
+                Debug.Log(bluePlayer.Count + " player0");
+                if(bluePlayer.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+            }
+            else
+            {
+                redPlayer.Remove(dead);
+                if (redPlayer.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+                Debug.Log(redPlayer.Count + " player1");
+            }
+        }
+
+        /*
+         * When a unit dies, remove them from the list, then check for a win condition.
+         */
+        public void removeEnemy(Enemy dead, int team)
+        {
+            if (team == 0)
+            {
+                blueComp.Remove(dead);
+                Debug.Log(redComp.Count + " enemy1");
+                if (redComp.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+            }
+            else
+            {
+                redComp.Remove(dead);
+                if (redComp.Count == 0)
+                {
+                    Application.LoadLevel("GameOver");
+                }
+                Debug.Log(redComp.Count + " enemy1");
+            }
+		}
+
 		/*
+		 *	Hides black sprite background visible between levels.
+		 */
+        void HideLevelImage()
+        {
+            //Disable the levelImage gameObject.
+            levelImage.SetActive(false);
+
+            //Set doingSetup to false allowing player to move again.
+            doingSetup = false;
+        }
+
+        /*
          *	When a player is a computer, this function is called in their start() method.
 		 *	Adds the unit to the appropriate list.
          */ 
-		public void AddEnemyToList(Enemy script, int team)
-		{
-			if (team == 0)
-			{
-				blueComp.Add(script);
-			}
-			else
+        public void AddEnemyToList(Enemy script, int team)
+        {
+            if (team == 0)
+            {
+                blueComp.Add(script);
+            }
+            else
 				redComp.Add(script);
-		}
-		
+        }
+
 		/*
 		 *	Helper to move computer-controlled units. Called in endTurn().
 		 */
 		IEnumerator MoveEnemies(AIBase ai)
-		{
-			Debug.Log("We made it");
-			//While enemiesMoving is true player is unable to move.
-			//Wait for turnDelay seconds, defaults to .1 (100 ms).
-			yield return new WaitForSeconds(turnDelay);               
-			//If there are no enemies spawned (IE in first level):
-			if (ai.Count == 0)
-			{
-				//Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
-				yield return new WaitForSeconds(turnDelay);
-			}
-			
-			//Loop through List of Enemy objects.
-			foreach(AIAction act in ai.acts)
-			{
-				Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
-				if(act.action==AIAction.Actions.Move)
-					act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
-				yield return new WaitForSeconds(act.obj.moveTime);
-			}
-			endTurn();           
-		}
-	}
+        {
+            Debug.Log("We made it");
+            //While enemiesMoving is true player is unable to move.
+            //Wait for turnDelay seconds, defaults to .1 (100 ms).
+            yield return new WaitForSeconds(turnDelay);               
+                //If there are no enemies spawned (IE in first level):
+                if (ai.Count == 0)
+                {
+                    //Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
+                    yield return new WaitForSeconds(turnDelay);
+                }
+
+                //Loop through List of Enemy objects.
+                foreach(AIAction act in ai.acts)
+                {
+                    Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
+                    if(act.action==AIAction.Actions.Move)
+                        act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
+                    if (act.action == AIAction.Actions.Attack) {
+                        Debug.Log("ATTACK ENEMY");
+
+                        act.obj.attack((int)act.pos.x, (int)act.pos.y);
+                    }
+                    act.obj.resetValidTiles();
+                    yield return new WaitForSeconds(act.obj.moveTime);
+                }
+            endTurn();           
+        }
+    }
 }

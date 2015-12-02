@@ -10,7 +10,23 @@ public class AISimple : AIBase {
         foreach(Enemy e in self)
         {
             Vector3 cur = e.currentPos;
-            actions.Add(new AIAction(e, AIAction.Actions.Move, cur + new Vector3(1, 1, 0)));
+            bool fin = false;
+            e.showValidAttack();
+            foreach (GameObject g in e.validAttack)
+            {
+                foreach (MovingObject mo in other)
+                {
+                    if (!fin)
+                    {
+                        if (g.transform.position.Equals(mo.currentPos)) { }
+                        actions.Add(new AIAction(e, AIAction.Actions.Attack, g.transform.position));
+                        Debug.Log("Attack");
+                        fin = true;
+                    }
+                }
+            }
+            if(!fin)
+                actions.Add(new AIAction(e, AIAction.Actions.Move, cur + new Vector3(1, 1, 0)));
         }
     }
 }

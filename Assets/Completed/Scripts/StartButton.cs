@@ -39,7 +39,11 @@ public class StartButton : MonoBehaviour {
         BoardManager.mode = 2;
         Application.LoadLevel(name);
     }
-
+    public void startGameAISelectPvE(string name)
+    {
+        gameObject.GetComponent<HingeJoint>();
+        Application.LoadLevel(name);
+    }
 	public void EndGame()
 	{
 		Application.Quit();
