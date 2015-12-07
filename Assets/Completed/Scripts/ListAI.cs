@@ -22,6 +22,7 @@ public class ListAI  {
             CompilerParameters parameters = new CompilerParameters();
             foreach (string file in Directory.GetFiles("AI"))
             {
+				Debug.Log ("file: " + file);
                 parameters = new CompilerParameters();
                 foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
                 {

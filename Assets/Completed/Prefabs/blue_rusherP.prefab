@@ -76,6 +76,7 @@ MonoBehaviour:
   attackPower: 4
   moveRange: 1
   stepsLeft: 8
+  totalSteps: 0
   myTurn: 0
   unitType: 2
   GM: {fileID: 0}
