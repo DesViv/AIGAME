@@ -3,7 +3,7 @@ using System.Collections;
 using System.CodeDom.Compiler;
 using System.IO;
 using System.Text;
-using Microsoft.CSharp;
+using Modified.Mono.CSharp;
 using System;
 using System.Reflection;
 using Completed;
@@ -18,7 +18,7 @@ public class ListAI  {
         if (!init)
         {
             AIPrograms = new Dictionary<string, AIBase>();
-            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CSharpCodeCompiler provider = new CSharpCodeCompiler();
             CompilerParameters parameters = new CompilerParameters();
             foreach (string file in Directory.GetFiles("AI"))
             {
