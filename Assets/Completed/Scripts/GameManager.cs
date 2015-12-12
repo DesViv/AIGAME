@@ -20,23 +20,23 @@ namespace Completed
         public Text ui_confirmText;
 		public enum MenuStates{END_TURN, MAIN_MENU};
 		private MenuStates currState;
-		
+
 		private Text levelText;                                 // Text to display current level number.
 		private GameObject levelImage;                          // Image to block out level as levels are being set up, background for levelText.
 		private BoardManager boardScript;                       // Store a reference to our BoardManager which will set up the level.
 		private int level = 1;                                  // Current level number, expressed in game as "Day 1".
 		private bool doingSetup = true;                         // Boolean to check if we're setting up board, prevent Player from moving during setup.
-		
+
 		public int curTeam = 0;
-		
+
 		//Every time a Player is added to the game board, it will add itself to one of these lists based on the team it's on in start() of Player.cs
 		public List<Player> bluePlayer;
 		public List<Player> redPlayer;
-		
+
 		//Every time an Enemy is added to the game board, it will add itself to one of these lists based on the team it's on by calling AddEnemyToList in start() of Enemy.cs
 		public List<Enemy> blueComp;
 		public List<Enemy> redComp;
-		
+
 		public AIBase blueAI;
 		public AIBase redAI;
 
@@ -96,7 +96,7 @@ namespace Completed
 				ui_confirm.SetActive(true);				// show the confirmation menu
 			}
 		}
-		
+
 		/*
 		 *	Button callback; called when the "Menu" button is clicked.
 		 *	Show the confirmation menu.
@@ -144,13 +144,17 @@ namespace Completed
                     setEnemyTurn(redComp, true);
                     setTurn(bluePlayer, false);
                     curTeam = 1;
+                    //Initialize the AI for this turn
                     List<MovingObject> other = new List<MovingObject>();
                     foreach (Player e in bluePlayer)
                     {
+                        //Add all the oppossing units
                         other.Add((MovingObject)e);
                     }
                     redAI.init(redComp, other);
+                    //Call AI script to determine behavior
                     redAI.onTurn();
+                    //Make the moves and handle animatiosn
                     StartCoroutine(MoveEnemies(redAI));
                 }
                 else
@@ -161,19 +165,23 @@ namespace Completed
                 }
             }
             else if (mode == 2)	// Computer vs Computer
-            { 
+            {
                 Debug.Log(blueComp.Count + " bCount" + " " + redComp.Count + " rCount");
                 if (curTeam == 0)
                 {
                     setEnemyTurn(redComp, true);
                     setEnemyTurn(blueComp, false);
                     List<MovingObject> other = new List<MovingObject>();
+                    //Initialize the AI for this turn
                     foreach (Enemy e in blueComp)
                     {
+                      //Add all the oppossing units
                         other.Add((MovingObject)e);
                     }
                     redAI.init(redComp, other);
+                    //Call AI script to determine behavior
                     redAI.onTurn();
+                    //Make the moves and handle animatiosn
                     StartCoroutine(MoveEnemies(redAI));
                     curTeam = 1;
                 }
@@ -182,12 +190,17 @@ namespace Completed
                     setEnemyTurn(blueComp, true);
                     setEnemyTurn(redComp, false);
                     List<MovingObject> other = new List<MovingObject>();
+                    //Initialize the AI for this turn
+
                     foreach (Enemy e in redComp)
                     {
+                      //Add all the oppossing units
                         other.Add((MovingObject)e);
                     }
                     blueAI.init(blueComp, other);
+                    //Call AI script to determine behavior
                     blueAI.onTurn();
+                    //Make the moves and handle animatiosn
                     StartCoroutine(MoveEnemies(blueAI));
                     curTeam = 0;
                 }
@@ -211,7 +224,7 @@ namespace Completed
 
         /*
          * Used by endTurn to set the boolean myTurn of enemies to true/false and reset their stepsLeft to stepsLeft
-         * At the moment, Enemies will automatically end their turn once they run out of moves, we need to change that so it's up to 
+         * At the moment, Enemies will automatically end their turn once they run out of moves, we need to change that so it's up to
          * whoever is implementing an AI algorithm TODO
          */
         public void setEnemyTurn(List<Enemy> stuff, bool set)
@@ -222,7 +235,7 @@ namespace Completed
                 temp.resetStepsRemaining();
 			}
 		}
-		
+
 		/*
          * Sets the current team whose turn it is
          * in Mode 0(PvP) one list of players will be on team0 and another on team1
@@ -232,8 +245,8 @@ namespace Completed
 		public void setCurTeam(int team)
 		{
 			curTeam = team;
-		}		
-		
+		}
+
 		/*
 		 *	Called when the scene is loaded; performs setup.
 		 */
@@ -243,10 +256,10 @@ namespace Completed
 				instance = this;
 			else if (instance != this)
 				Destroy(gameObject);		// destroy this if one already exists, to preserve singleton.
-			
+
 			DontDestroyOnLoad(gameObject);	// don't destroy this when reloading scene
 			mode = BoardManager.mode;
-			
+
 			// assign enemies to a new List of Enemy objects.
 			if (mode == 1)
 			{
@@ -256,19 +269,19 @@ namespace Completed
 			{
 				redComp = new List<Enemy>();
 			}
-			
+
 			// find and remember UI elements for use later
 			ui_confirm = GameObject.Find("Confirmation");
 			ui_confirmText = GameObject.Find("ConfirmPromptText").GetComponent<Text>();
 			ui_confirm.SetActive(false);
-			
+
 			// get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
-			
+
 			// initialize the rest of the game
 			InitGame();
 		}
-		
+
 		/*
 		 *	Initializes the game.
 		 */
@@ -276,10 +289,10 @@ namespace Completed
 		{
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
-			
+
 			//Get a reference to our image LevelImage by finding it by name.
 			levelImage = GameObject.Find("LevelImage");
-			
+
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
@@ -292,38 +305,38 @@ namespace Completed
     			blueAI = ListAI.AIPrograms[BoardManager.AIBlue];
             if (BoardManager.AIRed != "none")
 			    redAI = ListAI.AIPrograms[BoardManager.AIRed];
-			
+
 			//Set levelImage to active blocking player's view of the game board during setup.
 			doingSetup = false;
-			
+
 			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
 			Invoke("HideLevelImage", levelStartDelay);
-			
+
 			// clear all previous units
 			blueComp.Clear();
 			redComp.Clear();
 			bluePlayer.Clear();
 			redPlayer.Clear();
-			
+
 			// Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(mode);
 		}
-		
+
 		/*
          *	Used to set the mode.
 		 *	@param	i		The mode to use, an int.
-         */ 
+         */
 		public void setMode(int i)
 		{
 			mode = i;
 		}
-		
+
 		/*
 		 *	Called every frame to update the game.
 		 */
 		void Update()
-		{ 
-			mode = BoardManager.mode;         
+		{
+			mode = BoardManager.mode;
 		}
 
         public void removePlayer(Player dead, int team)
@@ -395,7 +408,7 @@ namespace Completed
         /*
          *	When a player is a computer, this function is called in their start() method.
 		 *	Adds the unit to the appropriate list.
-         */ 
+         */
         public void AddEnemyToList(Enemy script, int team)
         {
             if (team == 0)
@@ -414,7 +427,7 @@ namespace Completed
             Debug.Log("We made it");
             //While enemiesMoving is true player is unable to move.
             //Wait for turnDelay seconds, defaults to .1 (100 ms).
-            yield return new WaitForSeconds(turnDelay);               
+            yield return new WaitForSeconds(turnDelay);
                 //If there are no enemies spawned (IE in first level):
                 if (ai.Count == 0)
                 {
@@ -422,23 +435,27 @@ namespace Completed
                     yield return new WaitForSeconds(turnDelay);
                 }
 
-                //Loop through List of Enemy objects.
+                //Loop through List of AIActions
                 foreach(AIAction act in ai.acts)
                 {
+
                     Debug.Log(string.Format("Position {0},{1} To {2},{3}", act.obj.currentPos.x, act.obj.currentPos.y, act.pos.x, act.pos.y));
+                    //If it is an move than make the unit move
                     if(act.action==AIAction.Actions.Move)
                         act.obj.MoveEnemy((int)act.pos.x, (int)act.pos.y);
+                    //If it is a move make it attack
                     if (act.action == AIAction.Actions.Attack) {
                         Debug.Log("ATTACK ENEMY");
 
                         act.obj.attack((int)act.pos.x, (int)act.pos.y);
                     }
+                    //Reset valid tiles to prevent graphical problems.
                     act.obj.resetValidTiles();
                     yield return new WaitForSeconds(act.obj.moveTime);
                 }
             Debug.Log(string.Format("End Turn"));
 
-            endTurn();           
+            endTurn();
         }
     }
 }

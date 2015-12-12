@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,7 +28,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
+/*
+This is a copy from GitHub: https://github.com/mosa/Mono-Class-Libraries/blob/master/mcs/class/System/Microsoft.CSharp/CSharpCodeCompiler.cs
+Based off an answer to fix our building of Unity exes with the dynamic compling of C# scripts. The solution was found here http://answers.unity3d.com/questions/364580/scripting-works-in-editor-try-it-but-not-build.html in the post by aeroson. 
+*/
 namespace Modified.Mono.CSharp
 {
 
@@ -363,7 +366,7 @@ namespace Modified.Mono.CSharp
 				mcsOutput.Add (args.Data);
 				mcsOutMutex.ReleaseMutex ();
 			}
-		}		
+		}
 
 		private static string BuildArgs(CompilerParameters options,string[] fileNames, IDictionary <string, string> providerOptions)
 #else
@@ -430,7 +433,7 @@ namespace Modified.Mono.CSharp
 			foreach (string linkedResource in options.LinkedResources) {
 				args.AppendFormat("/linkresource:\"{0}\" ", linkedResource);
 			}
-			
+
 			if (providerOptions != null && providerOptions.Count > 0) {
 				string langver;
 
